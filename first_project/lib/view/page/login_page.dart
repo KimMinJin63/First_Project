@@ -1,3 +1,4 @@
+import 'package:first_project/controller/login_controller.dart';
 import 'package:first_project/util/app_color.dart';
 import 'package:first_project/view/page/find_password_page.dart';
 import 'package:first_project/view/page/signup_page.dart';
@@ -9,7 +10,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends GetView<LoginController> {
   const LoginPage({super.key});
   static const route = '/login';
 
@@ -37,7 +38,7 @@ class LoginPage extends StatelessWidget {
                 bottom: 0,
                 right: 0,
                 child: Container(
-                  margin: EdgeInsets.only(right: 60, bottom: 38),
+                  margin: EdgeInsets.only(right: 58, bottom: 38),
                     height: MediaQuery.of(context).size.height / 3,
                     child: Image.asset('assets/images/background_logo.jpeg')))
           ]),
@@ -76,7 +77,7 @@ class LoginPage extends StatelessWidget {
                                 const Text('|'),
                                 TextButton(
                                     onPressed: () =>
-                                        Get.toNamed(SignupPage.route),
+                                        Get.offNamed(SignupPage.route),
                                     child: const Text('회원가입',
                                         style:
                                             TextStyle(color: AppColor.black))),

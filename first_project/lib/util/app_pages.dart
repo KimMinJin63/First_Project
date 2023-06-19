@@ -2,6 +2,7 @@ import 'package:first_project/util/app_routes.dart';
 import 'package:first_project/view/page/find_password_page.dart';
 import 'package:first_project/view/page/login_page.dart';
 import 'package:first_project/view/page/signup_page.dart';
+import 'package:first_project/view/screen/main_screen.dart';
 import 'package:get/get.dart';
 
 class AppPages {
@@ -17,6 +18,11 @@ class AppPages {
     GetPage(
         name: AppRoutes.signup,
         page: () => const SignupPage(),
+        transition: Transition.fadeIn),
+            GetPage(
+        name: AppRoutes.main,
+        page: () => const MainScreen(),
         transition: Transition.fadeIn)
+
   ];
 }

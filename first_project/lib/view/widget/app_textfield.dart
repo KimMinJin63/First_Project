@@ -17,7 +17,7 @@ class AppTextfield extends StatelessWidget {
       child: TextField(
         controller: controller,
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.fromLTRB(10, 20, 0, 20),
+          contentPadding: const EdgeInsets.fromLTRB(10, 17, 0, 17),
           hintText: hint,
           hintStyle: AppTextStyle.koPtRegular16grey(),
           errorText: error,

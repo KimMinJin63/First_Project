@@ -1,15 +1,98 @@
+import 'package:first_project/controller/signup_controller.dart';
+import 'package:first_project/util/app_color.dart';
+import 'package:first_project/util/app_textstyle.dart';
+import 'package:first_project/view/page/login_page.dart';
+import 'package:first_project/view/widget/app_button.dart';
+import 'package:first_project/view/widget/app_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:get/get.dart';
 
-class SignupPage extends StatelessWidget {
+class SignupPage extends GetView<SingupController> {
   const SignupPage({super.key});
   static const route = '/signup';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text('signup page'),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        foregroundColor: AppColor.black,
+        elevation: 0,
+        title: Text(
+          '회원가입',
+          style: AppTextStyle.koPtRegular16(),
+        ),
+      ),
+      body: SafeArea(
+          child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: CustomScrollView(
+          scrollDirection: Axis.vertical,
+          slivers: [
+            SliverFillRemaining(
+              hasScrollBody: false,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(child: 
+                  Image.asset('assets/images/logo.jpeg',
+                  height: MediaQuery.of(context).size.height/6,
+                  )),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    '이름',
+                    style: AppTextStyle.koPtRegular16(),
+                  ),
+                  AppTextfield(
+                    hint: '이름을 입력해주세요',
+                    controller: controller.nameController,
+                    ),
+                  Text(
+                    '이메일',
+                    style: AppTextStyle.koPtRegular16(),
+                  ),
+                  AppTextfield(
+                    hint: '이메일을 입력해주세요',
+                    controller: controller.emailController,
+                    ),
+                  Text(
+                    '비밀번호',
+                    style: AppTextStyle.koPtRegular16(),
+                  ),
+                  AppTextfield(
+                    hint: '비밀번호를 입력해주세요(8자리 이상 영문 숫자 혼합)',
+                    controller: controller.pwController,
+                    ),
+                  Text(
+                    '비밀번호 확인',
+                    style: AppTextStyle.koPtRegular16(),
+                  ),
+                  AppTextfield(
+                    hint: '비밀번호를 한번 더 입력해주세요',
+                    controller: controller.pwConfirmController,
+                    ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width/7,
+                      child: AppButton(
+                        name: '인증', onpressed: (){}, color: AppColor.black),
+                    ),
+                  )
+                ],
+              ),
+              AppButton(name: '회원가입', onpressed: () => Get.offNamed(LoginPage.route), color: AppColor.black)
+            ],
+          ),
+           )] ),
+      )),
     );
   }
 }

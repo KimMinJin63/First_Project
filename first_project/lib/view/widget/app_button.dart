@@ -10,16 +10,16 @@ class AppButton extends StatelessWidget {
       required this.onpressed,
       required this.color});
   final String name;
-  final Function onpressed;
+  final Function() onpressed;
   final Color color;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => onpressed,
+      onPressed: onpressed,
       style: ElevatedButton.styleFrom(
           backgroundColor: color,
-          minimumSize: const Size.fromHeight(50),
+          minimumSize: const Size.fromHeight(55),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           )),
