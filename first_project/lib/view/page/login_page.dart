@@ -11,7 +11,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends GetView<LoginController> {
-  const LoginPage({super.key});
+  const LoginPage({Key? key});
   static const route = '/login';
 
   @override
@@ -24,65 +24,91 @@ class LoginPage extends GetView<LoginController> {
       ),
       body: Column(
         children: [
-          Stack(children: [
-            Row(
-              children: const [
-                AppBackGround(),
-                AppBackGround(),
-                AppBackGround(),
-                AppBackGround(),
-                AppBackGround(),
-              ],
-            ),
-            Positioned(
+          Stack(
+            children: [
+              Row(
+                children: const [
+                  AppBackGround(),
+                  AppBackGround(),
+                  AppBackGround(),
+                  AppBackGround(),
+                  AppBackGround(),
+                ],
+              ),
+              Positioned(
                 bottom: 0,
                 right: 0,
                 child: Container(
-                  margin: EdgeInsets.only(right: 58, bottom: 38),
-                    height: MediaQuery.of(context).size.height / 3,
-                    child: Image.asset('assets/images/background_logo.jpeg')))
-          ]),
+                  margin: const EdgeInsets.only(right: 58, bottom: 38),
+                  height: MediaQuery.of(context).size.height / 3,
+                  child: Image.asset('assets/images/background_logo.jpeg'),
+                ),
+              ),
+            ],
+          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(64, 64, 64, 0),
             child: Column(
               children: [
-                const AppTextfield(
+                AppTextfield(
                   hint: '이메일',
+                  controller: controller.emailController,
+                  onChanged: (_) => controller.activeButton(),
                 ),
-                const AppTextfield(
+                AppTextfield(
                   hint: '비밀번호',
+                  controller: controller.pwController,
+                  obscureText: true,
+                  onChanged: (_) => controller.activeButton(),
                 ),
                 Row(
-                  children: const [
-                    Icon(Icons.check_circle_outline_outlined),
-                    SizedBox(
-                      width: 5,
+                  children: [
+                    Obx(
+                      () => SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: Checkbox(
+                          value: controller.isAutoSignupOn.value,
+                          shape: const CircleBorder(),
+                          onChanged: (value) =>
+                              controller.isAutoSignupOn.value = value ?? false,
+                        ),
+                      ),
                     ),
-                    Text('자동로그인'),
+                    const SizedBox(width: 5),
+                    const Text('자동로그인'),
                   ],
                 ),
-                const SizedBox(
-                  height: 16,
+                const SizedBox(height: 16),
+                Obx(
+                  () => AppButton(
+                    name: '로그인',
+                    onPressed: controller.isButtonActive.value
+                        ? controller.login
+                        : null,
+                    color: AppColor.black,
+                  ),
                 ),
-                AppButton(name: '로그인', onpressed: () {}, color: AppColor.black),
                 Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TextButton(
-                                    onPressed: () =>
-                                        Get.toNamed(FindPasswordPage.route),
-                                    child: const Text('비밀번호 찾기',
-                                        style:
-                                            TextStyle(color: AppColor.black))),
-                                const Text('|'),
-                                TextButton(
-                                    onPressed: () =>
-                                        Get.offNamed(SignupPage.route),
-                                    child: const Text('회원가입',
-                                        style:
-                                            TextStyle(color: AppColor.black))),
-                              ],
-                            ),
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      onPressed: () => Get.toNamed(FindPasswordPage.route),
+                      child: const Text(
+                        '비밀번호 찾기',
+                        style: TextStyle(color: AppColor.black),
+                      ),
+                    ),
+                    const Text('|'),
+                    TextButton(
+                      onPressed: () => Get.toNamed(SignupPage.route),
+                      child: const Text(
+                        '회원가입',
+                        style: TextStyle(color: AppColor.black),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

@@ -29,7 +29,10 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   get: ^4.6.5
+  http: ^0.13.5
   firebase_auth: ^4.6.3
+  dio: ^5.2.1+1
+  shared_preferences: ^2.1.2
   cloud_firestore: ^4.8.1
   firebase_core: ^2.14.0
   flutter:

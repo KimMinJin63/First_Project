@@ -1,3 +1,4 @@
+import 'package:first_project/controller/find_password_controller.dart';
 import 'package:first_project/util/app_color.dart';
 import 'package:first_project/util/app_textstyle.dart';
 import 'package:first_project/view/widget/app_button.dart';
@@ -5,8 +6,9 @@ import 'package:first_project/view/widget/app_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:get/get.dart';
 
-class FindPasswordPage extends StatelessWidget {
+class FindPasswordPage extends GetView<FindPasswordController> {
   const FindPasswordPage({super.key});
   static const route = '/findPassword';
 
@@ -48,7 +50,7 @@ class FindPasswordPage extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: 8),
                         child: AppButton(
                           name: '전송', 
-                          onpressed: (){}, 
+                          onPressed: () => controller.resetPassword(controller.pwFindController.text), 
                           color: AppColor.black),
                       ),
                     )
