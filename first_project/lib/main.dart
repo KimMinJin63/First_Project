@@ -8,6 +8,7 @@ import 'package:first_project/controller/signup_controller.dart';
 import 'package:first_project/firebase_options.dart';
 import 'package:first_project/util/app_pages.dart';
 import 'package:first_project/util/app_routes.dart';
+import 'package:first_project/view/page/district_list_page.dart';
 import 'package:first_project/view/page/login_page.dart';
 import 'package:first_project/view/page/main_page.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
          Get.lazyPut(() => MainController(), fenix: true);
       }),
       getPages: AppPages.pages,
-      initialRoute: MainPage.route,
+      initialRoute: DistrictList.route,
       theme: ThemeData(fontFamily: 'PretendardRegular'),
     );
   }

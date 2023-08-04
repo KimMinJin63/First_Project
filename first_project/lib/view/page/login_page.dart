@@ -1,5 +1,6 @@
 import 'package:first_project/controller/login_controller.dart';
 import 'package:first_project/util/app_color.dart';
+import 'package:first_project/util/app_textstyle.dart';
 import 'package:first_project/view/page/find_password_page.dart';
 import 'package:first_project/view/page/signup_page.dart';
 import 'package:first_project/view/widget/app_background.dart';
@@ -83,6 +84,7 @@ class LoginPage extends GetView<LoginController> {
                 Obx(
                   () => AppButton(
                     name: '로그인',
+                    style: AppTextStyle.koPtRegular16white(),
                     onPressed: controller.isButtonActive.value
                         ? controller.login
                         : null,

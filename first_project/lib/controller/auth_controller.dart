@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_project/controller/signup_controller.dart';
+import 'package:first_project/view/page/district_list_page.dart';
 import 'package:first_project/view/page/login_page.dart';
 import 'package:first_project/view/page/main_page.dart';
 import 'package:first_project/view/page/signup_page.dart';
@@ -36,7 +37,7 @@ void onInit() async {
   FirebaseAuth.instance.authStateChanges().listen((value) async {
     _user(value);
     if (value != null) {
-      await Get.offAllNamed(MainPage.route);
+      await Get.offAllNamed(DistrictList.route);
     } else {
       await Get.offAllNamed(LoginPage.route);
     }

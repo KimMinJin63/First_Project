@@ -8,6 +8,9 @@ class AppTextStyle {
   static TextStyle koPtBold32() => const TextStyle(
       fontFamily: 'PretendardBold', fontSize: 32, color: AppColor.black);
 
+      static TextStyle koPtBold27() => const TextStyle(
+      fontFamily: 'PretendardBold', fontSize: 27, color: AppColor.black);
+
         static TextStyle koPtBold16() => const TextStyle(
       fontFamily: 'PretendardBold', fontSize: 16, color: AppColor.black);
 

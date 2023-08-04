@@ -50,6 +50,7 @@ class FindPasswordPage extends GetView<FindPasswordController> {
                         padding: const EdgeInsets.only(bottom: 8),
                         child: AppButton(
                           name: '전송', 
+                          style: AppTextStyle.koPtRegular16white(),
                           onPressed: () => controller.resetPassword(controller.pwFindController.text), 
                           color: AppColor.black),
                       ),

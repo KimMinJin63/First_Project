@@ -8,11 +8,15 @@ import 'package:get/get.dart';
 
 class DetailRestaurantPage extends GetView<DistrictController> {
   const DetailRestaurantPage({super.key});
+  static const route = '/detailRestaurant';
 
   @override
   Widget build(BuildContext context) {
     return 
-    Scaffold();
+    Scaffold(
+      
+      
+    );
     // FutureBuilder<List<District>>(
     //      future: RestaurantData.fetchRestaurants(area),
     //   builder: (context, snapshot) {

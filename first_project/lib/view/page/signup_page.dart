@@ -101,6 +101,7 @@ class SignupPage extends GetView<SingupController> {
                         width: MediaQuery.of(context).size.width / 7,
                         child: AppButton(
                             name: '인증',
+                            style: AppTextStyle.koPtRegular16white(),
                             onPressed: () {
                               controller.registerWithEmailAndPassword();
                             },
@@ -111,6 +112,7 @@ class SignupPage extends GetView<SingupController> {
                 ),
                 AppButton(
                     name: '회원가입',
+                    style: AppTextStyle.koPtRegular16white(),
                     onPressed: () async {
                       if (controller.isEmailverify.value == true) {
                         var result = await controller.register();

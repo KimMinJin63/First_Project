@@ -45,6 +45,7 @@ class AppDialogOnly extends StatelessWidget {
                 ),
                 AppButton(
                   onPressed: onPressed,
+                  style: AppTextStyle.koPtRegular16white(),
                   name: buttonText, color: AppColor.black)
           ],
         ),

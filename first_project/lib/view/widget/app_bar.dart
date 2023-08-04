@@ -15,7 +15,7 @@ class AppBars extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title, style: AppTextStyle.koPtRegular14()),
+        title: Text(title, style: AppTextStyle.koPtBold27()),
         backgroundColor: Colors.transparent,
         foregroundColor: color,
         elevation: 0,
