@@ -2,9 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_project/model/district.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DistrictController extends GetxController {
+
+  var pageController = PageController();
   // Future<List<District>> readData() async {
   //   Dio dio = Dio();
   //   List district = ['중구, 남구, 북구, 동구, 서구, 달서구, 달성군, 수성구'];
@@ -22,7 +25,7 @@ class DistrictController extends GetxController {
   //   return [];
   // }
 
-    Future<List<String>> fetchCategories() async {
+  Future<List<String>> fetchCategories() async {
     List<String> categories = [];
     try {
       QuerySnapshot querySnapshot =
@@ -39,7 +42,7 @@ class DistrictController extends GetxController {
     return categories;
   }
 
-Future<List<District>> fetchRestaurant(String distrct, String category) async {
+  Future<List<District>> findRestaurant(String distrct, String category) async {
     final snapshot = await FirebaseFirestore.instance
         .collection(distrct) // Change 'restaurants' to your collection name
         .where('category', isEqualTo: category)
@@ -47,7 +50,6 @@ Future<List<District>> fetchRestaurant(String distrct, String category) async {
 
     return snapshot.docs.map((doc) => District.fromSnapshot(doc)).toList();
   }
-
 
   // void district() async {
   //   User? user = FirebaseAuth.instance.currentUser;
@@ -80,5 +82,4 @@ Future<List<District>> fetchRestaurant(String distrct, String category) async {
   //     } else {}
   //   }
   // }
-
 }

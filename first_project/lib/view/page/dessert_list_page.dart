@@ -16,7 +16,7 @@ class DessertListPage extends GetView<DistrictController> {
 
   @override
   Widget build(BuildContext context) {
-        final selectedDistrict = Get.arguments as String;
+    final selectedDistrict = Get.arguments as String;
 
     return Scaffold(
         appBar: const PreferredSize(
@@ -29,65 +29,86 @@ class DessertListPage extends GetView<DistrictController> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Center(
-                  child: Image.asset(
-                'assets/images/logo.jpeg',
-                height: MediaQuery.of(context).size.height / 5,
+                  child: Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: Image.asset(
+                  'assets/images/logo.jpeg',
+                  height: MediaQuery.of(context).size.height / 5,
+                ),
               )),
               const SizedBox(
                 height: 70,
               ),
               Expanded(
                 child: FutureBuilder<List<District>>(
-                  future: controller.fetchRestaurant(selectedDistrict, '디저트/베이커리'),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator();
-                    } else if (snapshot.hasError) {
-                      return Text(
-                          'Error fetching categories: ${snapshot.error}');
-                          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      return Center(
-                        child: Text(
-                          'SORRY\n식당이 없습니다ㅠㅠ',
-                          style: AppTextStyle.koPtBold32(),
-                          textAlign: TextAlign.center,
+                    future:
+                        controller.findRestaurant(selectedDistrict, '디저트/베이커리'),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(
+                        child: SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(),
                         ),
                       );
-                    } else {
-                      List<District> restaurants = snapshot.data!;
-                      return ListView.builder(
-                        itemCount: restaurants.length,
-                        itemBuilder: (context, index) {
-                          String name = restaurants[index]
-                              .name; // Use the 'name' property of the District object
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 8),
-                            child: GestureDetector(
-                              onTap: () => Get.toNamed(
-                                DetailRestaurantPage.route,
-                                arguments: name,
-                              ),
-                              child: Container(
-                                height: 55,
-                                decoration: BoxDecoration(
-                                  color: AppColor.black,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    name,
-                                    textAlign: TextAlign.center,
-                                    style: AppTextStyle.koPtSemiBold20white(),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    }
-                  },
-                ),
+                      } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                        return Center(
+                          child: Text(
+                            'SORRY\n식당이 없습니다ㅠㅠ',
+                            style: AppTextStyle.koPtBold32(),
+                            textAlign: TextAlign.center,
+                          ),
+                        );
+                      } else {
+                        List<District> restaurants = snapshot.data!;
+                        int pages = (restaurants.length / 5).ceil();
+                        return PageView.builder(
+                            itemCount: pages,
+                            itemBuilder: (context, pageIndex) {
+                              int startIndex = pageIndex * 5;
+                              int endIndex = (pageIndex + 1) * 5;
+                              if (endIndex > restaurants.length) {
+                                endIndex = restaurants.length;
+                              }
+                              List<District> pageItems =
+                                  restaurants.sublist(startIndex, endIndex);
+
+                              return ListView.builder(
+                                itemCount: pageItems.length,
+                                itemBuilder: (context, index) {
+                                  String name = pageItems[index]
+                                      .name; // Use the 'name' property of the District object
+                                  return Padding(
+                                    padding: const EdgeInsets.only(bottom: 12),
+                                    child: GestureDetector(
+                                      onTap: () => Get.toNamed(
+                                        DetailRestaurantPage.route,
+                                        arguments: name,
+                                      ),
+                                      child: Container(
+                                        height: 55,
+                                        decoration: BoxDecoration(
+                                          color: AppColor.black,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            name,
+                                            textAlign: TextAlign.center,
+                                            style: AppTextStyle
+                                                .koPtSemiBold20white(),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            });
+                      }
+                    }),
               ),
             ],
           ),
