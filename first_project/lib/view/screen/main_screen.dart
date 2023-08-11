@@ -32,9 +32,9 @@ import 'package:get/get.dart';
 //     final selectedDistrict = Get.arguments as String;
 //     // ];
 //     return Scaffold(
-//       appBar: const PreferredSize(
+//       appBar:  PreferredSize(
 //         preferredSize: Size.fromHeight(30),
-//         child: AppBars(title: '', color: AppColor.black),
+//         child: AppBars(title: '$selectedDistrict', color: AppColor.black),
 //       ),
 //       body: Padding(
 //         padding: const EdgeInsets.all(16),
@@ -106,12 +106,12 @@ class MainScreen extends GetView {
 
   @override
   Widget build(BuildContext context) {
-    final selectedDistrict = Get.arguments as String;
+    final selectedDistrict = Get.arguments;
 
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(30),
-        child: AppBars(title: selectedDistrict, color: AppColor.black),
+        child: AppBars(title: '$selectedDistrict', color: AppColor.black),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -134,15 +134,15 @@ class MainScreen extends GetView {
                     AppCategoryButton(
                         category: '한식',
                         onPressed: () => Get.toNamed(KoreanListPage.route,
-                            arguments: selectedDistrict)),
+                            arguments: '$selectedDistrict')),
                     AppCategoryButton(
                         category: '중식',
                         onPressed: () => Get.toNamed(ChineseListPage.route,
-                            arguments: selectedDistrict)),
+                            arguments: '$selectedDistrict')),
                     AppCategoryButton(
                         category: '일식',
                         onPressed: () => Get.toNamed(JapaneseListPage.route,
-                            arguments: selectedDistrict)),
+                            arguments: '$selectedDistrict')),
                   ],
                 ),
                 Row(
@@ -150,28 +150,28 @@ class MainScreen extends GetView {
                     AppCategoryButton(
                         category: '양식',
                         onPressed: () => Get.toNamed(WesternListPage.route,
-                            arguments: selectedDistrict)),
+                            arguments: '$selectedDistrict')),
                     AppCategoryButton(
                         category: '디저트/\n베이커리',
                         onPressed: () => Get.toNamed(DessertListPage.route,
-                            arguments: selectedDistrict)),
+                            arguments: '$selectedDistrict')),
                     AppCategoryButton(
                         category: '특별한\n술집',
                         onPressed: () => Get.toNamed(BarListPage.route,
-                            arguments: selectedDistrict)),
+                            arguments: '$selectedDistrict')),
                   ],
                 ),
                 Row(
                   children: [
                     AppCategoryButton(category: '세계요리',
                         onPressed: () => Get.toNamed(WorldListPage.route,
-                            arguments: selectedDistrict)),
+                            arguments: '$selectedDistrict')),
                     AppCategoryButton(category: '퓨전\n뷔페',
                         onPressed: () => Get.toNamed(FusionListPage.route,
-                            arguments: selectedDistrict)),
+                            arguments: '$selectedDistrict')),
                     AppCategoryButton(category: '전통차/\n커피',
                         onPressed: () => Get.toNamed(CoffeeListPage.route,
-                            arguments: selectedDistrict)),
+                            arguments: '$selectedDistrict')),
                   ],
                 ),
               ],

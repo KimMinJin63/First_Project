@@ -30,12 +30,12 @@ class ChineseListPage extends GetView<DistrictController> {
             children: [
               Center(
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: Image.asset(
-                                  'assets/images/logo.jpeg',
-                                  height: MediaQuery.of(context).size.height / 5,
-                                ),
-                  )),
+                padding: const EdgeInsets.only(top: 16),
+                child: Image.asset(
+                  'assets/images/logo.jpeg',
+                  height: MediaQuery.of(context).size.height / 5,
+                ),
+              )),
               const SizedBox(
                 height: 70,
               ),
@@ -83,7 +83,10 @@ class ChineseListPage extends GetView<DistrictController> {
                                   child: GestureDetector(
                                     onTap: () => Get.toNamed(
                                       DetailRestaurantPage.route,
-                                      arguments: name,
+                                      arguments: {
+                                        'district': selectedDistrict,
+                                        'name': name,
+                                      },
                                     ),
                                     child: Container(
                                       height: 55,

@@ -83,7 +83,10 @@ class WorldListPage extends GetView<DistrictController> {
                                     child: GestureDetector(
                                       onTap: () => Get.toNamed(
                                         DetailRestaurantPage.route,
-                                        arguments: name,
+                                      arguments: {
+                                        'district': selectedDistrict,
+                                        'name': name,
+                                      },
                                       ),
                                       child: Container(
                                         height: 55,

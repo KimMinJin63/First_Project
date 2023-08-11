@@ -33,7 +33,10 @@ dependencies:
   firebase_auth: ^4.6.3
   dio: ^5.2.1+1
   shared_preferences: ^2.1.2
+  flutter_html: ^2.2.1
+  html: ^0.15.4
   cloud_firestore: ^4.8.1
+  smooth_page_indicator: ^1.1.0
   firebase_core: ^2.14.0
   flutter:
     sdk: flutter

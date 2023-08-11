@@ -16,6 +16,10 @@ class AppTextStyle {
 
         static TextStyle koPtBold16red() => const TextStyle(
       fontFamily: 'PretendardBold', fontSize: 16, color: AppColor.red);
+      
+              static TextStyle koPtBold14darkgrey() => const TextStyle(
+      fontFamily: 'PretendardBold', fontSize: 14, color: AppColor.darkgrey);
+
 
 
   static TextStyle koPtSemiBold32() => const TextStyle(
@@ -27,6 +31,9 @@ class AppTextStyle {
 
         static TextStyle koPtSemiBold16() => const TextStyle(
       fontFamily: 'PretendardSemiBold', fontSize: 16, color: AppColor.black);
+
+        static TextStyle koPtRegular18white() => const TextStyle(
+      fontFamily: 'PretendardRegular', fontSize: 18, color: AppColor.white);
 
 
   static TextStyle koPtRegular16grey() => const TextStyle(
