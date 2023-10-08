@@ -20,8 +20,6 @@ class AppTextStyle {
               static TextStyle koPtBold14darkgrey() => const TextStyle(
       fontFamily: 'PretendardBold', fontSize: 14, color: AppColor.darkgrey);
 
-
-
   static TextStyle koPtSemiBold32() => const TextStyle(
       fontFamily: 'PretendardSemiBold', fontSize: 32, color: AppColor.black);
 
