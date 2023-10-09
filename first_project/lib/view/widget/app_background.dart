@@ -8,7 +8,7 @@ class AppBackGround extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Container( 
       width: MediaQuery.of(context).size.width / 5,
       height: MediaQuery.of(context).size.height / 2.2,
       decoration: const BoxDecoration(
