@@ -7,7 +7,7 @@ import 'package:first_project/view/page/signup_page.dart';
 import 'package:first_project/view/screen/main_screen.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+ 
 class AuthController extends GetxController {
   final Rxn<User> _user = Rxn();
   User? get user => _user.value;
