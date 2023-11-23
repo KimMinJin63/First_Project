@@ -38,5 +38,4 @@ static const bar = BarListPage.route;
 static const world = WorldListPage.route;
 static const fusion = FusionListPage.route;
 static const coffee = CoffeeListPage.route;
-
 }
