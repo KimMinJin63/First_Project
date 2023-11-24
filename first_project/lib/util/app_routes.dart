@@ -29,7 +29,7 @@ class AppRoutes {
   static const likeScreen = LikeScreen.route;
   static const myScreen = MyScreen.route;
   static const districtList = DistrictList.route;
-  static const detailRestaurant = DetailRestaurantPage.route;
+  static const detailRestaurant = DetailRestaurantPage.route; 
   static const chinese = ChineseListPage.route;
   static const japanese = JapaneseListPage.route;
   static const western = WesternListPage.route;
