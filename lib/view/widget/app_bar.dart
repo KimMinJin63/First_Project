@@ -1,12 +1,14 @@
 import 'package:first_project/util/app_textstyle.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
+
 
 class AppBars extends StatelessWidget implements PreferredSizeWidget {
-  const AppBars({super.key, required this.title, required this.color});
+  const AppBars({super.key, required this.title, required this.color, this.home});
+
   final String title;
   final Color color;
+  final VoidCallback? home;
 
   @override
   Size get preferredSize => const Size.fromHeight(100);
@@ -19,6 +21,14 @@ class AppBars extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor: Colors.transparent,
         foregroundColor: color,
         elevation: 0,
+        actions: home != null
+            ? [
+                IconButton(
+                  onPressed: home,
+                  icon: const Icon(Icons.home),
+                ),
+              ]
+            : null,
       ),
     );
   }

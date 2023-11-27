@@ -4,6 +4,7 @@ import 'package:first_project/model/district.dart';
 import 'package:first_project/util/app_color.dart';
 import 'package:first_project/util/app_textstyle.dart';
 import 'package:first_project/view/page/detail_restaurant_page.dart';
+import 'package:first_project/view/page/main_page.dart';
 import 'package:first_project/view/widget/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -19,9 +20,9 @@ class FusionListPage extends GetView<DistrictController> {
     final selectedDistrict = Get.arguments as String;
 
     return Scaffold(
-        appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(30),
-          child: AppBars(title: '퓨전/뷔페', color: AppColor.black),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(30),
+          child: AppBars(title: '퓨전/뷔페', color: AppColor.black, home: () => Get.offAllNamed(MainPage.route)),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16),

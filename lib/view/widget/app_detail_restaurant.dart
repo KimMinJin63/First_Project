@@ -14,14 +14,15 @@ class AppDetailRestaurant extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(detailName, style: AppTextStyle.koPtRegular16white()),
-        Wrap(children: [
-          Text(
+        Flexible(
+          child: Text(
             detail,
             style: AppTextStyle.koPtRegular16white(),
             textAlign: TextAlign.left,
-            overflow: TextOverflow.fade,
+            softWrap: true,
+            overflow: TextOverflow.visible,
           ),
-        ])
+        )
       ],
     );
   }
