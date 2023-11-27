@@ -28,8 +28,8 @@ class DistrictController extends GetxController {
     final snapshot = await FirebaseFirestore.instance
         .collection(district) 
         .where('category', isEqualTo: category)
-        .orderBy('category')
-        .orderBy('name', descending: true)
+        // .orderBy('category')
+        // .orderBy('name', descending: true)
         .get();
     return snapshot.docs.map((doc) => District.fromSnapshot(doc)).toList();
   }

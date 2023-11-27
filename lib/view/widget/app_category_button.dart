@@ -17,7 +17,7 @@ class AppCategoryButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        width: MediaQuery.of(context).size.width/3.7,
+        width: MediaQuery.of(context).size.width/3.8,
         height: MediaQuery.of(context).size.height/7,
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
