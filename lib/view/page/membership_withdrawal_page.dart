@@ -2,12 +2,9 @@ import 'package:first_project/controller/main_controller.dart';
 import 'package:first_project/util/app_color.dart';
 import 'package:first_project/util/app_textstyle.dart';
 import 'package:first_project/view/widget/app_bar.dart';
-import 'package:first_project/view/widget/app_bottom_navigation.dart';
 import 'package:first_project/view/widget/app_button.dart';
 import 'package:first_project/view/widget/app_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 
 class MembershipWithdrawalPage extends GetView<MainController> {

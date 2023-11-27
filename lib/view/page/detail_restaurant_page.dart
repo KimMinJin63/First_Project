@@ -2,6 +2,7 @@ import 'package:first_project/controller/district_controller.dart';
 import 'package:first_project/model/district.dart';
 import 'package:first_project/util/app_color.dart';
 import 'package:first_project/util/app_textstyle.dart';
+import 'package:first_project/view/page/main_page.dart';
 import 'package:first_project/view/widget/app_bar.dart';
 import 'package:first_project/view/widget/app_detail_restaurant.dart';
 import 'package:flutter/material.dart';
@@ -22,9 +23,9 @@ class DetailRestaurantPage extends GetView<DistrictController> {
     final name = args['name'];
 
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(30),
-        child: AppBars(title: '', color: AppColor.black),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(30),
+        child: AppBars(title: '', color: AppColor.black, home: () {Get.back(); Get.back(); Get.back();}),
       ),
       body: SafeArea(
           child: Padding(
@@ -58,8 +59,9 @@ class DetailRestaurantPage extends GetView<DistrictController> {
                   } else {
                     List<District> restaurants = snapshot.data!;
                     return SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
+                      // scrollDirection: Axis.horizontal,
                       child: Container(
+                        width: MediaQuery.of(context).size.width,
                         alignment: Alignment.bottomLeft,
                         decoration: BoxDecoration(color: AppColor.black),
                         child: Padding(

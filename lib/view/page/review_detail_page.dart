@@ -1,6 +1,4 @@
 import 'dart:math';
-
-import 'package:first_project/controller/district_controller.dart';
 import 'package:first_project/controller/review_controller.dart';
 import 'package:first_project/model/district.dart';
 import 'package:first_project/model/message.dart';
@@ -10,8 +8,6 @@ import 'package:first_project/view/widget/app_bar.dart';
 import 'package:first_project/view/widget/app_detail_restaurant.dart';
 import 'package:first_project/view/widget/app_review_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 
 class ReviewDetailPage extends GetView<ReviewController> {
@@ -73,7 +69,7 @@ class ReviewDetailPage extends GetView<ReviewController> {
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         alignment: Alignment.bottomLeft,
-                        decoration: BoxDecoration(color: AppColor.black),
+                        decoration: const BoxDecoration(color: AppColor.black),
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Column(
@@ -121,11 +117,11 @@ class ReviewDetailPage extends GetView<ReviewController> {
                         future: controller.streamMessages(collections, restaurant.cnt),
                           builder: (context, asyncSnapshot) {
                         if (asyncSnapshot.connectionState == ConnectionState.waiting) {
-                          return CircularProgressIndicator(); // 연결 중이면 로딩 표시
+                          return const CircularProgressIndicator(); // 연결 중이면 로딩 표시
                         } else if (!asyncSnapshot.hasData) {
-                          return Text('데이터가 없습니다.'); // 데이터 없음
+                          return const Text('데이터가 없습니다.'); // 데이터 없음
                         } else if (asyncSnapshot.hasError) {
-                          return Text('Error adding message: $e');
+                          return const Text('Error adding message: $e');
                         } else {
                           List<Message> messages = asyncSnapshot.data!;
                           print('Received messages: $messages');
@@ -154,7 +150,7 @@ class ReviewDetailPage extends GetView<ReviewController> {
                     Expanded(
                       child: TextField(
                         controller: controller.textEditingController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             border: InputBorder.none,
                             hintText: '리뷰를 작성해주세요',
                             filled: true,
@@ -166,7 +162,7 @@ class ReviewDetailPage extends GetView<ReviewController> {
                           controller.onPressedButton(
                               collections, restaurant.cnt);
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.send,
                           size: 20,
                           color: AppColor.black,

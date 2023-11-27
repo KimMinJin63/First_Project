@@ -1,8 +1,6 @@
 import 'package:first_project/util/app_color.dart';
 import 'package:first_project/view/widget/app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class MyReviewPage extends StatelessWidget {
   const MyReviewPage({super.key});
