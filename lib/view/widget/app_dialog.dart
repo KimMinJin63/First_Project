@@ -2,8 +2,6 @@ import 'package:first_project/util/app_color.dart';
 import 'package:first_project/util/app_textstyle.dart';
 import 'package:first_project/view/widget/app_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class AppDialogs extends StatelessWidget {
   const AppDialogs(

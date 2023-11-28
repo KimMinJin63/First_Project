@@ -5,8 +5,6 @@ import 'package:first_project/view/page/login_page.dart';
 import 'package:first_project/view/widget/app_button.dart';
 import 'package:first_project/view/widget/app_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 
 class SignupPage extends GetView<SingupController> {

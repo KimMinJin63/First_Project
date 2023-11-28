@@ -5,8 +5,6 @@ import 'package:first_project/view/screen/my_screen.dart';
 import 'package:first_project/view/screen/search_screen.dart';
 import 'package:first_project/view/widget/app_bottom_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 
 class MainPage extends GetView<MainController> {

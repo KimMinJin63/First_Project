@@ -93,7 +93,6 @@
 //         ));
 //   }
 // }
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_project/controller/district_controller.dart';
 import 'package:first_project/model/district.dart';
 import 'package:first_project/util/app_color.dart';
@@ -103,10 +102,7 @@ import 'package:first_project/view/page/main_page.dart';
 import 'package:first_project/view/widget/app_bar.dart';
 import 'package:first_project/view/widget/app_page_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class KoreanListPage extends GetView<DistrictController> {
   const KoreanListPage({super.key});

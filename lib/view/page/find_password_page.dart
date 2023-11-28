@@ -4,8 +4,6 @@ import 'package:first_project/util/app_textstyle.dart';
 import 'package:first_project/view/widget/app_button.dart';
 import 'package:first_project/view/widget/app_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 
 class FindPasswordPage extends GetView<FindPasswordController> {

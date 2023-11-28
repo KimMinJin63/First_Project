@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_project/controller/district_controller.dart';
 import 'package:first_project/util/app_color.dart';
 import 'package:first_project/util/app_textstyle.dart';
-import 'package:first_project/view/screen/main_screen.dart';
 import 'package:first_project/view/widget/app_button.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
