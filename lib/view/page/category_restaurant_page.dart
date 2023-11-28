@@ -9,15 +9,9 @@ import 'package:first_project/view/page/japanese_list_page.dart';
 import 'package:first_project/view/page/korean_list_page.dart';
 import 'package:first_project/view/page/western_list_page.dart';
 import 'package:first_project/view/page/world_list_page.dart';
-import 'package:first_project/view/screen/like_screen.dart';
-import 'package:first_project/view/screen/my_screen.dart';
-import 'package:first_project/view/screen/search_screen.dart';
 import 'package:first_project/view/widget/app_bar.dart';
-import 'package:first_project/view/widget/app_bottom_navigation.dart';
 import 'package:first_project/view/widget/app_category_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 
 class CategoryRestaurantPage extends GetView<MainController> {

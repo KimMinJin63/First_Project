@@ -2,14 +2,9 @@ import 'package:first_project/controller/district_controller.dart';
 import 'package:first_project/model/district.dart';
 import 'package:first_project/util/app_color.dart';
 import 'package:first_project/util/app_textstyle.dart';
-import 'package:first_project/view/page/main_page.dart';
 import 'package:first_project/view/widget/app_bar.dart';
 import 'package:first_project/view/widget/app_detail_restaurant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 
 class DetailRestaurantPage extends GetView<DistrictController> {

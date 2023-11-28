@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_project/controller/district_controller.dart';
 import 'package:first_project/model/district.dart';
 import 'package:first_project/util/app_color.dart';
@@ -7,8 +6,6 @@ import 'package:first_project/view/page/detail_restaurant_page.dart';
 import 'package:first_project/view/page/main_page.dart';
 import 'package:first_project/view/widget/app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 
 class CoffeeListPage extends GetView<DistrictController> {

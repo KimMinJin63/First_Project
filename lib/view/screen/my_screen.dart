@@ -2,12 +2,9 @@ import 'package:first_project/controller/auth_controller.dart';
 import 'package:first_project/util/app_color.dart';
 import 'package:first_project/util/app_textstyle.dart';
 import 'package:first_project/view/page/membership_withdrawal_page.dart';
-import 'package:first_project/view/page/my_review_page.dart';
 import 'package:first_project/view/page/review_page.dart';
 import 'package:first_project/view/widget/app_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 
 class MyScreen extends GetView<AuthController> {

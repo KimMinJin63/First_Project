@@ -6,6 +6,7 @@ import 'package:first_project/controller/login_controller.dart';
 import 'package:first_project/controller/main_controller.dart';
 import 'package:first_project/controller/review_controller.dart';
 import 'package:first_project/controller/signup_controller.dart';
+import 'package:first_project/controller/station_controller.dart';
 import 'package:first_project/firebase_options.dart';
 import 'package:first_project/util/app_pages.dart';
 import 'package:first_project/view/page/login_page.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         Get.lazyPut(() => DistrictController(), fenix: true);
         Get.lazyPut(() => ReviewController(), fenix: true);
         Get.lazyPut(() => MainController(), fenix: true);
-
+        Get.lazyPut(() => StationController(), fenix: true);
         // Get.put(MainController());
       }),
       getPages: AppPages.pages,

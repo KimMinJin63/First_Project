@@ -1,7 +1,5 @@
 import 'package:first_project/util/app_color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class AppBackGround extends StatelessWidget {
   const AppBackGround({super.key});
