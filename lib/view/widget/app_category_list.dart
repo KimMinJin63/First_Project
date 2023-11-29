@@ -50,7 +50,7 @@ class AppCategoryList extends StatelessWidget {
                         itemCount: restaurants.length,
                         itemBuilder: (context, index) {
                           String name = restaurants[index]
-                              .name; // Use the 'name' property of the District object
+                              .name!; // Use the 'name' property of the District object
                           return GestureDetector(
                             onTap: () => Get.toNamed(
                               KoreanListPage.route,

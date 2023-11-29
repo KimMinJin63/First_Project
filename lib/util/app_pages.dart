@@ -6,6 +6,7 @@ import 'package:first_project/view/page/coffee_list_page.dart';
 import 'package:first_project/view/page/dessert_list_page.dart';
 import 'package:first_project/view/page/detail_restaurant_page.dart';
 import 'package:first_project/view/page/find_restaurant_page.dart';
+import 'package:first_project/view/page/find_station_page.dart';
 import 'package:first_project/view/page/fusion_list_page.dart';
 import 'package:first_project/view/page/japanese_list_page.dart';
 import 'package:first_project/view/page/korean_list_page.dart';
@@ -63,9 +64,13 @@ class AppPages {
         name: AppRoutes.myScreen,
         page: () => const MyScreen(),
         transition: Transition.fadeIn),
+    // GetPage(
+    //     name: AppRoutes.findRestaurant,
+    //     page: () => const FindRestaurantPage(),
+    //     transition: Transition.fadeIn),
     GetPage(
-        name: AppRoutes.findRestaurant,
-        page: () => const FindRestaurantPage(),
+        name: AppRoutes.findStation,
+        page: () => const FindStationPage(),
         transition: Transition.fadeIn),
     GetPage(
         name: AppRoutes.detailRestaurant,

@@ -75,7 +75,7 @@ class ReviewDetailPage extends GetView<ReviewController> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: restaurants.map((restaurant) {
-                              String htmlMenu = restaurant.menu;
+                              String htmlMenu = restaurant.menu!;
                               htmlMenu = htmlMenu.replaceAll('<br />', '\n');
                               return Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,

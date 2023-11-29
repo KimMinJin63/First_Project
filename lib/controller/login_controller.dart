@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_project/controller/auth_controller.dart';
 import 'package:first_project/util/app_color.dart';
-import 'package:first_project/view/page/login_page.dart';
 import 'package:first_project/view/page/main_page.dart';
-import 'package:first_project/view/screen/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -43,6 +41,7 @@ class LoginController extends GetxController {
         .login(emailController.text, pwController.text, isAutoSignupOn.value)) {
       final prefs = await SharedPreferences.getInstance();
       prefs.setBool('isAutoSigningOn', isAutoSignupOn.value);
+      Get.offAllNamed(MainPage.route);
     } else {
       Get.snackbar('로그인 실패', '잘못된 비밀번호입니다. 다시 시도해주세요',
           snackPosition: SnackPosition.BOTTOM,
