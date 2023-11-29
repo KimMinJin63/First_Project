@@ -64,15 +64,15 @@ class DetailRestaurantPage extends GetView<DistrictController> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: restaurants.map((restaurant) {
-                              String htmlAddress = restaurant.address;
+                              String htmlAddress = restaurant.address!;
                               htmlAddress =
                                   htmlAddress.replaceAll('<br />', '\n');
-                              String htmlMenu = restaurant.menu;
+                              String htmlMenu = restaurant.menu!;
                               htmlMenu = htmlMenu.replaceAll('<br />', '\n');
-                              String htmlSubway = restaurant.subway;
+                              String htmlSubway = restaurant.subway!;
                               htmlSubway =
                                   htmlSubway.replaceAll('<br />', '\n');
-                              String htmlBus = restaurant.bus;
+                              String htmlBus = restaurant.bus!;
                               htmlBus = htmlBus.replaceAll('<br />', '\n');
                               return Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,

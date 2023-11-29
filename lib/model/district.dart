@@ -4,29 +4,29 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class District {
-  String cnt;
-  String address;
-  String category;
-  String name;
-  String telNum;
-  String time;
-  String menu;
-  String booking;
-  String parking;
-  String subway;
-  String bus;
+  String? cnt;
+  String? address;
+  String? category;
+  String? name;
+  String? telNum;
+  String? time;
+  String? menu;
+  String? booking;
+  String? parking;
+  String? subway;
+  String? bus;
   District({
-    required this.cnt,
-    required this.address,
-    required this.category,
-    required this.name,
-    required this.telNum,
-    required this.time,
-    required this.menu,
-    required this.booking,
-    required this.parking,
-    required this.subway,
-    required this.bus,
+    this.cnt,
+    this.address,
+    this.category,
+    this.name,
+    this.telNum,
+    this.time,
+    this.menu,
+    this.booking,
+    this.parking,
+    this.subway,
+    this.bus,
   });
 
   Map<String, dynamic> toMap() {

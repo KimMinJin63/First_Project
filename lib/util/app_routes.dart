@@ -5,6 +5,7 @@ import 'package:first_project/view/page/coffee_list_page.dart';
 import 'package:first_project/view/page/dessert_list_page.dart';
 import 'package:first_project/view/page/detail_restaurant_page.dart';
 import 'package:first_project/view/page/find_restaurant_page.dart';
+import 'package:first_project/view/page/find_station_page.dart';
 import 'package:first_project/view/page/fusion_list_page.dart';
 import 'package:first_project/view/page/japanese_list_page.dart';
 import 'package:first_project/view/page/korean_list_page.dart';
@@ -33,8 +34,9 @@ class AppRoutes {
   static const searchScreen = SearchScreen.route;
   static const likeScreen = LikeScreen.route;
   static const myScreen = MyScreen.route;
-  static const findRestaurant = FindRestaurantPage.route;
+  // static const findRestaurant = FindRestaurantPage.route;
   static const detailRestaurant = DetailRestaurantPage.route;
+  static const findStation = FindStationPage.route;
   static const chinese = ChineseListPage.route;
   static const japanese = JapaneseListPage.route;
   static const western = WesternListPage.route;

@@ -5,10 +5,7 @@ import 'package:first_project/model/district.dart';
 import 'package:first_project/model/message.dart';
 import 'package:first_project/model/my_info.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class ReviewController extends GetxController {
   RxString findName = ''.obs;

@@ -25,36 +25,36 @@ class AppDistrict extends GetView<DistrictController> {
        if (onPressed != null) {
           onPressed(district);
         }
-        var districteUrl =
-            url;
-        Dio dio = Dio();
-        final response = await dio.get(districteUrl);
+        // var districteUrl =
+        //     url;
+        // Dio dio = Dio();
+        // // final response = await dio.get(districteUrl);
 
-        if (response.statusCode == 200) {
-          final data = response.data['data'];
-          String uid = FirebaseAuth.instance.currentUser!.uid;
+        // if (response.statusCode == 200) {
+        //   final data = response.data['data'];
+        //   String uid = FirebaseAuth.instance.currentUser!.uid;
 
-          for (var item in data) {
-            final cnt = item['cnt'];
-            await FirebaseFirestore.instance
-                .collection(district)
-                .doc(cnt.toString())
-                .set({
-              'cnt': item['cnt'],
-              'address': item['GNG_CS'],
-              'category': item['FD_CS'],
-              'name': item['BZ_NM'],
-              'telNum': item['TLNO'],
-              'time': item['MBZ_HR'],
-              'menu': item['MNU'],
-              'booking': item['BKN_YN'],
-              'parking': item['PKPL'],
-              'subway': item['SBW'],
-              'bus': item['BUS'],
-            });
-          }
-          print(response.data);
-        }
+        //   for (var item in data) {
+        //     final cnt = item['cnt'];
+        //     await FirebaseFirestore.instance
+        //         .collection(district)
+        //         .doc(cnt.toString())
+        //         .set({
+        //       'cnt': item['cnt'],
+        //       'address': item['GNG_CS'],
+        //       'category': item['FD_CS'],
+        //       'name': item['BZ_NM'],
+        //       'telNum': item['TLNO'],
+        //       'time': item['MBZ_HR'],
+        //       'menu': item['MNU'],
+        //       'booking': item['BKN_YN'],
+        //       'parking': item['PKPL'],
+        //       'subway': item['SBW'],
+        //       'bus': item['BUS'],
+        //     });
+        //   }
+        //   print(response.data);
+        // }
       },
     );
   }

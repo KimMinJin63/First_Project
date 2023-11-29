@@ -76,7 +76,7 @@ class FusionListPage extends GetView<DistrictController> {
                                 itemCount: pageItems.length,
                                 itemBuilder: (context, index) {
                                   String name = pageItems[index]
-                                      .name; // Use the 'name' property of the District object
+                                      .name!; // Use the 'name' property of the District object
                                   return Padding(
                                     padding: const EdgeInsets.only(bottom: 12),
                                     child: GestureDetector(
