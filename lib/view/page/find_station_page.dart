@@ -58,6 +58,7 @@ class FindStationPage extends GetView<StationController> {
                   Expanded(
                     child: TextField(
                       controller: controller.searchController,
+                      autofocus: true,
                       onChanged: (value) {
                         controller.findStation.value = value;
                         controller.findStations();

@@ -12,6 +12,7 @@ import 'package:first_project/view/page/korean_list_page.dart';
 import 'package:first_project/view/page/find_password_page.dart';
 import 'package:first_project/view/page/login_page.dart';
 import 'package:first_project/view/page/main_page.dart';
+import 'package:first_project/view/page/map_page.dart';
 import 'package:first_project/view/page/membership_withdrawal_page.dart';
 import 'package:first_project/view/page/my_review_page.dart';
 import 'package:first_project/view/page/review_detail_page.dart';
@@ -36,6 +37,7 @@ class AppRoutes {
   static const myScreen = MyScreen.route;
   // static const findRestaurant = FindRestaurantPage.route;
   static const detailRestaurant = DetailRestaurantPage.route;
+  static const mapPage = MapPage.route;
   static const findStation = FindStationPage.route;
   static const chinese = ChineseListPage.route;
   static const japanese = JapaneseListPage.route;
