@@ -4,6 +4,7 @@ import 'package:first_project/controller/district_controller.dart';
 import 'package:first_project/controller/find_password_controller.dart';
 import 'package:first_project/controller/login_controller.dart';
 import 'package:first_project/controller/main_controller.dart';
+import 'package:first_project/controller/map_controller.dart';
 import 'package:first_project/controller/review_controller.dart';
 import 'package:first_project/controller/signup_controller.dart';
 import 'package:first_project/controller/station_controller.dart';
@@ -36,7 +37,8 @@ class MyApp extends StatelessWidget {
         Get.lazyPut(() => DistrictController(), fenix: true);
         Get.lazyPut(() => ReviewController(), fenix: true);
         Get.lazyPut(() => MainController(), fenix: true);
-        Get.lazyPut(() => StationController(), fenix: true);
+        Get.lazyPut(() => StationController  (), fenix: true);
+        Get.lazyPut(() => MapController  (), fenix: true);
         // Get.put(MainController());
       }),
       getPages: AppPages.pages,

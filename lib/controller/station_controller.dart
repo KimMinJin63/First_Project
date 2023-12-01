@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 class StationController extends GetxController {
   TextEditingController searchController = TextEditingController();
   RxString findStation = ''.obs;
-  RxString switchName = ''.obs;
+  // RxString switchName = ''.obs;
   // RxList switchNameList = [].obs;
   RxList<District> searchResults = <District>[].obs;
 
@@ -51,11 +51,11 @@ class StationController extends GetxController {
         print('일치하는 수 : ${results.length}');
         searchResults.assignAll(results);
 
-        for (var district in searchResults) {
-          switchName.value = district.name!;
-          print('이름 : ${switchName.value}');
-          // return searchResults.contains(findStation.value);
-        }
+        // for (var district in searchResults) {
+        //   switchName.value = district.name!;
+        //   print('이름 : ${switchName.value}');
+        //   // return searchResults.contains(findStation.value);
+        // }
       }
     } else {
       searchResults.clear();

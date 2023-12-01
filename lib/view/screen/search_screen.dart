@@ -3,6 +3,7 @@ import 'package:first_project/util/app_color.dart';
 import 'package:first_project/util/app_textstyle.dart';
 import 'package:first_project/view/page/find_restaurant_page.dart';
 import 'package:first_project/view/page/find_station_page.dart';
+import 'package:first_project/view/page/map_page.dart';
 import 'package:first_project/view/widget/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,7 +39,7 @@ class SearchScreen extends GetView<DistrictController> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          
+                          Get.toNamed(MapPage.route);
                         },
                         child: Container(
                           height: MediaQuery.of(context).size.height / 5,
