@@ -37,8 +37,9 @@ class MyApp extends StatelessWidget {
         Get.lazyPut(() => DistrictController(), fenix: true);
         Get.lazyPut(() => ReviewController(), fenix: true);
         Get.lazyPut(() => MainController(), fenix: true);
-        Get.lazyPut(() => StationController  (), fenix: true);
-        Get.lazyPut(() => MapController  (), fenix: true);
+        Get.lazyPut(() => StationController(), fenix: true);
+        Get.put(MapController());
+        // Get.lazyPut(() => MapController  (), fenix: true);
         // Get.put(MainController());
       }),
       getPages: AppPages.pages,
