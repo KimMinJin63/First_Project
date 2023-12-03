@@ -28,34 +28,28 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  get: ^4.6.5
-  http: ^0.13.5
-  firebase_auth: ^4.6.3
-  geoflutterfire_plus: ^0.0.19
-  dio: ^5.2.1+1
-  intl: ^0.18.1
-  shared_preferences: ^2.1.2
-  persistent_bottom_nav_bar: ^5.0.2
-  flutter_html: 3.0.0-beta.1
-  html: ^0.15.4
   cloud_firestore: ^4.8.1
-  smooth_page_indicator: ^1.1.0
+  cupertino_icons: ^1.0.2
+  dio: ^5.2.1+1
+  firebase_auth: ^4.6.3
   firebase_core: ^2.14.0
-  geocoding: ^2.1.1
-  geolocator: ^10.1.0
-  geocoding_ios: ^2.1.1
-  google_maps_flutter: ^2.5.0
   flutter:
     sdk: flutter
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  flutter_html: 3.0.0-beta.1
+  geocoding: ^2.1.1
+  geocoding_ios: ^2.1.1
+  geoflutterfire_plus: ^0.0.19
+  geolocator: ^10.1.0
+  get: ^4.6.5
+  google_maps_flutter: ^2.5.0
+  html: ^0.15.4
+  http: ^1.1.2
+  intl: ^0.18.1
+  persistent_bottom_nav_bar: ^5.0.2
+  shared_preferences: ^2.1.2
+  smooth_page_indicator: ^1.1.0
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -63,10 +57,11 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter packages.
 flutter:
 
@@ -82,10 +77,8 @@ flutter:
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
@@ -104,6 +97,5 @@ flutter:
     - family: PretendardMedium
       fonts:
         - asset: assets/fonts/Pretendard-Medium.otf
-  #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
