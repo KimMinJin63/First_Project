@@ -1,5 +1,7 @@
 import 'package:first_project/controller/map_controller.dart';
 import 'package:first_project/model/district.dart';
+import 'package:first_project/util/app_color.dart';
+import 'package:first_project/view/page/map_find_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -12,24 +14,54 @@ class MapPage extends GetView<MapController> {
   Widget build(BuildContext context) {
     GoogleMapController? mapController;
     return Scaffold(
-      body: Obx(
-        () => GoogleMap(
-          onMapCreated: (controller) {
-            mapController = controller;
-          },
-          markers: controller.markers.toSet(),
-          onTap: (coordinate) {
-            mapController!.animateCamera(CameraUpdate.newLatLng(coordinate));
-            // mapController!.animateCamera(CameraUpdate.newLatLng(coordinate));
-            // controller.addMarker(coordinate as District);
-            // print('마커 리스트 : ${controller.markers}');
-          },
-          initialCameraPosition: CameraPosition(
-            zoom: 17,
-            target: LatLng(35.883464, 128.630775),
+      extendBodyBehindAppBar: true,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(100),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(8, 60, 16, 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                  onPressed: () => Get.back(),
+                  icon: const Icon(Icons.arrow_back_ios)),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: Colors.black),
+                child: IconButton(
+                  onPressed: () {
+                    Get.toNamed(MapFindPage.route);
+                  },
+                  icon: const Icon(
+                    Icons.search,
+                    size: 20,
+                    color: AppColor.white,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
+      body: Stack(
+        children: [
+        Obx(
+          () => GoogleMap(
+            initialCameraPosition: const CameraPosition(
+              zoom: 16,
+              target: LatLng(35.883464, 128.630775),
+            ),
+            onTap: (coordinate) {
+              mapController!.animateCamera(CameraUpdate.newLatLng(coordinate));
+            },
+            onMapCreated: (controller) {
+              mapController = controller;
+            },
+            markers: controller.markers.toSet(),
+          ),
+        ),
+      ]),
     );
   }
 }
