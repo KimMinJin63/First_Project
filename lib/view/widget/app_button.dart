@@ -5,7 +5,12 @@ class AppButton extends StatelessWidget {
       {super.key,
       required this.name,
       this.onPressed,
-      required this.color, required this.style});
+      required this.color,
+      required this.style,
+      this.latitude,
+      this.longitude});
+  final double? latitude;
+  final double? longitude;
   final String name;
   final Function()? onPressed;
   final Color color;

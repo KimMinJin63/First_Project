@@ -1,135 +1,9 @@
-// import 'dart:async';
-// import 'dart:math';
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:geocoding/geocoding.dart';
-// import 'package:get/get.dart';
-// import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-// class MapController extends GetxController {
-//   RxList<Marker> markers = <Marker>[].obs;
-//   RxString findAddress = ''.obs;
-
-//   // Future<void> initMarkerFromAddress(String address) async {
-//   //   try {
-//   //     List<Location> locations = await locationFromAddress(address);
-//   //     print('로케이션 : $locations');
-//   //     if (locations.isNotEmpty) {
-//   //       Location location = locations.first;
-//   //       int markerId = Random().nextInt(100);
-//   //       markers.add(
-//   //         Marker(
-//   //           markerId: MarkerId(markerId.toString()),
-//   //           position: LatLng(location.latitude, location.longitude),
-//   //           infoWindow: InfoWindow(
-//   //             title: '마커',
-//   //             snippet: address,
-//   //           ),
-//   //         ),
-//   //       );
-//   //       print('잘 변환되었니? : ${markers.first}');
-//   //     } else {
-//   //       print('해당 주소에 대한 좌표를 찾을 수 없습니다.');
-//   //     }
-//   //   } catch (e) {
-//   //     print('오류: $e');
-//   //   }
-//   // }
-
-//   // Future<void> initMarker(Map<String, dynamic> data, String id) async {
-//   //   try {
-//   //     String address = data['address'] ?? '주소 없음';
-//   //     print('$address');
-
-//   //     // String address = data['address'] ?? '주소 없음';
-//   //     List<Location> locations = await locationFromAddress(address);
-
-//   //     if (locations.isNotEmpty) {
-//   //       Location location = locations.first;
-//   //       int markerId = Random().nextInt(100);
-//   //       markers.add(
-//   //         Marker(
-//   //           markerId: MarkerId(markerId.toString()),
-//   //           position: LatLng(location.latitude, location.longitude),
-//   //           infoWindow: InfoWindow(
-//   //             title: data['name'] ?? '이름 없음',
-//   //             snippet: address,
-//   //           ),
-//   //         ),
-//   //       );
-//   //     } else {
-//   //       print('Could not find coordinates for the address: $address');
-//   //     }
-//   //   } catch (e) {
-//   //     print('Errorrr: $e');
-//   //   }
-//   // }
-
-//   Future<void> getMarkerData() async {
-//     // try {
-//       for (var collectionName in [
-//         '동구',
-//         '서구',
-//         '남구',
-//         '북구',
-//         '중구',
-//         '달서구',
-//         '수성구',
-//         '달성군',
-//       ]) {
-//         QuerySnapshot snapshot =
-//             await FirebaseFirestore.instance.collection(collectionName).get();
-//             print('지도 스냅샷 : ${snapshot.docs}');
-//         if (snapshot.docs.isNotEmpty) {
-//           for (int i = 0; i < snapshot.docs.length; i++) {
-//             Map<String, dynamic> data =
-//                 (snapshot.docs[i].data() as Map<String, dynamic>);
-//             String address = data['address'] ?? '주소 없음';
-//             print('주소 : $address');
-
-//             // List<Location> locations = await locationFromAddress(address);
-//             // print('지도 로케이션스 : $locations');
-//             if (address.isNotEmpty) {
-//               Location? location;
-//               int markerId = Random().nextInt(100);
-//               markers.add(
-//                 Marker(
-//                   markerId: MarkerId(markerId.toString()),
-//                   position: LatLng(location!.latitude, location.longitude),
-//                   infoWindow: InfoWindow(
-//                     title: data['name'] ?? '이름 없음',
-//                     snippet: address,
-//                   ),
-//                 ),
-//               );
-//               // print('locations: $locations');
-//             } else {
-//               print('Could not find coordinates for the address: $address');
-//             }
-//           }
-//         }
-//       }
-//     // } catch (e) {
-//     //   print('Errorff: $e');
-
-//     // }
-//   }
-
-//   @override
-//   void onInit() {
-//     getMarkerData();
-//     print('onInit 호출');
-//     // TODO: implement onInit
-//     super.onInit();
-//   }
-// }
-
 import 'dart:async';
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:first_project/model/district.dart';
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -141,9 +15,15 @@ class MapController extends GetxController {
   RxList<District> searchResults = <District>[].obs;
   RxList restaurantList = [].obs;
   RxBool isLoading = false.obs;
+  GoogleMapController? _controller;
+  // GoogleMapController? get controller => _controller;
 
+void onMapCreated(GoogleMapController controller) {
+  _controller = controller;
+  update();
+}
 
- Future<void> initMarkerFromAddress(String address, String name) async {
+  Future<void> initMarkerFromAddress(String address, String name) async {
     try {
       Map<String, dynamic> latLng = await getLatLngFromAddress(address);
       double latitude = latLng['latitude'];
@@ -166,7 +46,7 @@ class MapController extends GetxController {
   }
 
   Future<Map<String, dynamic>> getLatLngFromAddress(String address) async {
-    final apiKey = 'AIzaSyAVDtO5q1HORjAP0XP20HhDfU5zBQ-o00c'; // 본인의 Google Maps API 키로 대체
+    final apiKey = 'AIzaSyCRni83jUNvpoAtGwJuE7E9U0-PkCi3aJw';
     final apiUrl = 'https://maps.googleapis.com/maps/api/geocode/json';
 
     try {
@@ -196,7 +76,7 @@ class MapController extends GetxController {
     }
   }
 
-    Future<void> getMarkerData() async {
+  Future<void> getMarkerData() async {
     for (var collectionName in [
       '동구',
       '서구',
@@ -217,6 +97,7 @@ class MapController extends GetxController {
           String address = data['address'] ?? '주소 없음';
           String name = data['name'] ?? '이름 없음';
           print('이름 : $name');
+          print('주소 : $address');
 
           await initMarkerFromAddress(address, name);
         }
@@ -224,6 +105,7 @@ class MapController extends GetxController {
     }
   }
 
+//식당 검색시 결과 보여주는 코드
   findRestaurant() async {
     if (findRestaurants.value.isNotEmpty) {
       List<QuerySnapshot> snapshots = [];
@@ -240,7 +122,9 @@ class MapController extends GetxController {
       ]) {
         QuerySnapshot snapshot = await FirebaseFirestore.instance
             .collection(collectionName)
-            .where('name')
+            .where('name', isGreaterThanOrEqualTo: findRestaurants.value)
+            .where('name',
+                isLessThanOrEqualTo: '${findRestaurants.value}\uf8ff')
             .get();
         snapshots.add(snapshot);
       }
@@ -262,33 +146,71 @@ class MapController extends GetxController {
     }
   }
 
-  Future<void> getRestaurantData() async {
-    final double radius = 2.0; // 반경 2km
-    final CollectionReference restaurantsCollection =
-        FirebaseFirestore.instance.collection('restaurants');
+  // Future<void> getRestaurantData() async {
+  //   final double radius = 2.0; // 반경 2km
+  //   final CollectionReference restaurantsCollection =
+  //       FirebaseFirestore.instance.collection('restaurants');
 
-    isLoading.value = true;
+  //   isLoading.value = true;
 
+  //   try {
+  //     QuerySnapshot restaurantsSnapshot = await restaurantsCollection.get();
+  //     List<DocumentSnapshot> restaurantsDocs = restaurantsSnapshot.docs;
+
+  //     restaurantList.clear();
+
+  //     for (DocumentSnapshot restaurantDoc in restaurantsDocs) {
+  //       String address = restaurantDoc['address'];
+  //       print(address);
+
+  //       // 주소만을 restaurantList에 추가
+  //       restaurantList.add({
+  //         'address': address,
+  //       });
+  //     }
+
+  //     isLoading.value = false;
+  //     // ... (나머지 부분은 restaurantList를 사용하여 지도에 마커를 추가하는 등의 코드)
+  //   } catch (e) {
+  //     print('오류: $e');
+  //   }
+  // }
+
+//지도 이동시 주소를 위도와 경도로 바꾸는 과정
+  void moveToRestaurantLocation(District restaurant) async {
     try {
-      QuerySnapshot restaurantsSnapshot = await restaurantsCollection.get();
-      List<DocumentSnapshot> restaurantsDocs = restaurantsSnapshot.docs;
-
-      restaurantList.clear();
-
-      for (DocumentSnapshot restaurantDoc in restaurantsDocs) {
-        String address = restaurantDoc['address'];
-        print(address);
-
-        // 주소만을 restaurantList에 추가
-        restaurantList.add({
-          'address': address,
-        });
+      Map<String, dynamic> latLng =
+          await getLatLngFromAddress(restaurant.address ?? '주소없음');
+      print('_______?$latLng');
+      print('---------${restaurant.address}');
+      if (latLng != null) {
+        double latitude = latLng['latitude'];
+        double longitude = latLng['longitude'];
+        await moveToLocation(latitude, longitude);
+        print('-------------- $latLng');
+      } else {
+        print('주소 변환 결과가 null입니다.');
       }
-
-      isLoading.value = false;
-      // ... (나머지 부분은 restaurantList를 사용하여 지도에 마커를 추가하는 등의 코드)
     } catch (e) {
-      print('오류: $e');
+      print('주소를 변환하는 도중 오류가 발생했습니다: $e');
+    }
+  }
+
+//바뀐 위도와 경도를 이용해서 지도 이동하기
+  Future<void> moveToLocation(double latitude, double longitude) async {
+    try {
+      if (_controller != null) {
+        await _controller!.animateCamera(CameraUpdate.newCameraPosition(
+          CameraPosition(
+            target: LatLng(latitude, longitude),
+            zoom: 18.0,
+          ),
+        ));
+      } else {
+        print('GoogleMapController가 초기화되지 않았습니다. 대기 후 다시 시도합니다.');
+      }
+    } catch (e) {
+      print('지도 이동 중 오류: $e');
     }
   }
 
