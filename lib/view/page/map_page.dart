@@ -23,12 +23,14 @@ class MapPage extends GetView<MapController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                  onPressed: () => Get.back(),
-                  icon: const Icon(Icons.arrow_back_ios)),
+                onPressed: () => Get.back(),
+                icon: const Icon(Icons.arrow_back_ios),
+              ),
               Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: Colors.black),
+                  borderRadius: BorderRadius.circular(50),
+                  color: Colors.black,
+                ),
                 child: IconButton(
                   onPressed: () {
                     Get.toNamed(MapFindPage.route);
@@ -46,22 +48,31 @@ class MapPage extends GetView<MapController> {
       ),
       body: Stack(
         children: [
-        Obx(
-          () => GoogleMap(
-            initialCameraPosition: const CameraPosition(
-              zoom: 16,
-              target: LatLng(35.883464, 128.630775),
+          Obx(
+            () => GoogleMap(
+              myLocationButtonEnabled: true,
+              initialCameraPosition: const CameraPosition(
+                zoom: 16,
+                target: LatLng(35.883464, 128.630775),
+              ),
+              onTap: (coordinate) {
+                // mapController 변수를 사용
+                if (mapController != null) {
+                  mapController!
+                      .animateCamera(CameraUpdate.newLatLng(coordinate));
+                }
+              },
+              onMapCreated: (controllers) {
+                // 전역 변수에 할당
+                mapController = controllers;
+                // MapController의 onMapCreated 메서드 호출
+                controller.onMapCreated(controllers);
+              },
+              markers: controller.markers.toSet(),
             ),
-            onTap: (coordinate) {
-              mapController!.animateCamera(CameraUpdate.newLatLng(coordinate));
-            },
-            onMapCreated: (controller) {
-              mapController = controller;
-            },
-            markers: controller.markers.toSet(),
           ),
-        ),
-      ]),
+        ],
+      ),
     );
   }
 }
