@@ -14,6 +14,7 @@ import 'package:first_project/view/page/login_page.dart';
 import 'package:first_project/view/page/main_page.dart';
 import 'package:first_project/view/page/map_find_page.dart';
 import 'package:first_project/view/page/map_page.dart';
+import 'package:first_project/view/page/marker_detail_page.dart';
 import 'package:first_project/view/page/membership_withdrawal_page.dart';
 import 'package:first_project/view/page/my_review_page.dart';
 import 'package:first_project/view/page/review_detail_page.dart';
@@ -36,6 +37,7 @@ class AppRoutes {
   static const searchScreen = SearchScreen.route;
   static const likeScreen = LikeScreen.route;
   static const myScreen = MyScreen.route;
+  static const markerDetail = MarkerDetailPage.route;
   // static const findRestaurant = FindRestaurantPage.route;
   static const detailRestaurant = DetailRestaurantPage.route;
   static const mapFind = MapFindPage.route;

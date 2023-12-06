@@ -33,25 +33,25 @@ class ReviewPage extends GetView<ReviewController> {
                       onChanged: (value) {
                         controller.findName.value = value;
                       },
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         filled: true,
                         fillColor: AppColor.darkgrey,
                         hintText: '장소, 지명을 검색해주세요.',
-                        contentPadding: EdgeInsets.all(20),
+                        contentPadding: const EdgeInsets.all(20),
                         border: InputBorder.none,
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            if (controller.findName.value.isNotEmpty) {
+                              controller.findRestaurant();
+                            }
+                          },
+                          icon: const Icon(
+                            Icons.search,
+                            size: 20,
+                            color: AppColor.black,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      if (controller.findName.value.isNotEmpty) {
-                        controller.findRestaurant();
-                      }
-                    },
-                    icon: const Icon(
-                      Icons.search,
-                      size: 20,
-                      color: AppColor.black,
                     ),
                   ),
                 ],
@@ -75,7 +75,7 @@ class ReviewPage extends GetView<ReviewController> {
                     itemBuilder: (context, index) {
                       final restaurant = controller.searchResults[index];
                       return AppButton(
-                          name: controller.findName.value,
+                          name: restaurant.name ?? '식당 없음',
                           onPressed: () => Get.toNamed(ReviewDetailPage.route,
                               arguments: restaurant),
                           color: AppColor.black,

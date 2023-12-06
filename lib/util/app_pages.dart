@@ -15,6 +15,7 @@ import 'package:first_project/view/page/login_page.dart';
 import 'package:first_project/view/page/main_page.dart';
 import 'package:first_project/view/page/map_find_page.dart';
 import 'package:first_project/view/page/map_page.dart';
+import 'package:first_project/view/page/marker_detail_page.dart';
 import 'package:first_project/view/page/membership_withdrawal_page.dart';
 import 'package:first_project/view/page/my_review_page.dart';
 import 'package:first_project/view/page/review_detail_page.dart';
@@ -73,6 +74,10 @@ class AppPages {
     GetPage(
         name: AppRoutes.findStation,
         page: () => const FindStationPage(),
+        transition: Transition.fadeIn),
+    GetPage(
+        name: AppRoutes.markerDetail,
+        page: () => const MarkerDetailPage(),
         transition: Transition.fadeIn),
     GetPage(
         name: AppRoutes.mapFind,

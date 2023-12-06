@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 class StationController extends GetxController {
   TextEditingController searchController = TextEditingController();
   RxString findStation = ''.obs;
+  RxBool isSearching = false.obs;
   // RxString switchName = ''.obs;
   // RxList switchNameList = [].obs;
   RxList<District> searchResults = <District>[].obs;

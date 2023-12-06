@@ -3,6 +3,10 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:first_project/model/district.dart';
+import 'package:first_project/util/app_color.dart';
+import 'package:first_project/view/page/detail_restaurant_page.dart';
+import 'package:first_project/view/page/marker_detail_page.dart';
+import 'package:first_project/view/page/review_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -16,12 +20,13 @@ class MapController extends GetxController {
   RxList restaurantList = [].obs;
   RxBool isLoading = false.obs;
   GoogleMapController? _controller;
+  District? selectedRestaurant;
   // GoogleMapController? get controller => _controller;
 
-void onMapCreated(GoogleMapController controller) {
-  _controller = controller;
-  update();
-}
+  void onMapCreated(GoogleMapController controller) {
+    _controller = controller;
+    update();
+  }
 
   Future<void> initMarkerFromAddress(String address, String name) async {
     try {
@@ -30,11 +35,30 @@ void onMapCreated(GoogleMapController controller) {
       double longitude = latLng['longitude'];
 
       int markerId = Random().nextInt(100);
+
+      District restaurant = District(
+          name: name, address: address); // Create a restaurant instance
+      selectedRestaurant = restaurant; // Set the selected restaurant
+
       markers.add(
         Marker(
+            // onTap: () {
+            //   print('눌리니?');
+            //   Get.to(
+            //     MarkerDetailPage.route,
+            //     arguments: restaurant, // 이 부분이 추가된 부분
+            //   );
+            // },
           markerId: MarkerId(markerId.toString()),
           position: LatLng(latitude, longitude),
           infoWindow: InfoWindow(
+            // onTap: () {
+            //   print('눌리니?');
+            //   Get.to(
+            //     MarkerDetailPage.route,
+            //     arguments: restaurant, // 이 부분이 추가된 부분
+            //   );
+            // },
             title: name,
             snippet: address,
           ),
@@ -177,7 +201,8 @@ void onMapCreated(GoogleMapController controller) {
   // }
 
 //지도 이동시 주소를 위도와 경도로 바꾸는 과정
-  void moveToRestaurantLocation(District restaurant) async {
+  void moveToRestaurantLocation(
+      BuildContext context, District restaurant) async {
     try {
       Map<String, dynamic> latLng =
           await getLatLngFromAddress(restaurant.address ?? '주소없음');
@@ -187,6 +212,8 @@ void onMapCreated(GoogleMapController controller) {
         double latitude = latLng['latitude'];
         double longitude = latLng['longitude'];
         await moveToLocation(latitude, longitude);
+        openBottomSheet(context, restaurant);
+        // openDialog(context, restaurant);
         print('-------------- $latLng');
       } else {
         print('주소 변환 결과가 null입니다.');
@@ -219,5 +246,129 @@ void onMapCreated(GoogleMapController controller) {
     getMarkerData();
     print('onInit 호출');
     super.onInit();
+  }
+
+  void openDialog(BuildContext context, District restaurant) {
+    Get.dialog(
+      Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          child: Container(
+            height: 230,
+            padding: const EdgeInsets.all(26),
+            decoration: const BoxDecoration(
+                color: AppColor.white,
+                borderRadius: BorderRadius.all(Radius.circular(26))),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Material(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            restaurant.name!,
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Text(restaurant.category!)
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text(restaurant.address!),
+                    Text(restaurant.telNum!),
+                    Text(restaurant.time!),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    //  });
+  }
+
+  // void openBottomSheet(BuildContext context, District restaurant) {
+  //   Future.delayed(Duration.zero, () {
+  //     Get.bottomSheet(Container(
+  //       height: 230,
+  //       padding: const EdgeInsets.all(26),
+  //       decoration: const BoxDecoration(
+  //           color: AppColor.white,
+  //           borderRadius: BorderRadius.only(
+  //               topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+  //       child: SizedBox(
+  //         width: MediaQuery.of(context).size.width,
+  //         height: 200,
+  //         child: Column(
+  //           children: [
+  //             Text(
+  //               restaurant.name!,
+  //               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+  //             ),
+  //             SizedBox(
+  //               height: 15,
+  //             ),
+  //             Text(restaurant.address!),
+  //             Text(restaurant.telNum!)
+  //           ],
+  //         ),
+  //       ),
+  //     ));
+  //   });
+  // }
+  void openBottomSheet(BuildContext context, District restaurant) {
+    // Future.delayed(Duration.zero, () {
+    Get.bottomSheet(Container(
+      height: 230,
+      padding: const EdgeInsets.all(26),
+      decoration: const BoxDecoration(
+          color: AppColor.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        // height: 200,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: Text(
+                    restaurant.name!,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Text(restaurant.category!)
+              ],
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Text(restaurant.address!),
+            Text(restaurant.telNum!),
+            Text(restaurant.time!),
+            TextButton(
+                onPressed: () {
+                  Get.toNamed(
+                    MarkerDetailPage.route,
+                    arguments: restaurant,
+                  );
+                },
+                child: Text('자세히보기 >>>'))
+          ],
+        ),
+      ),
+    ));
+    // });
   }
 }

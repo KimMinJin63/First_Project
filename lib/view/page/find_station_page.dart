@@ -21,106 +21,87 @@ class FindStationPage extends GetView<StationController> {
         child: AppBars(title: '대중 교통 기준', color: AppColor.black),
       ),
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            // Padding(
-            //   padding: const EdgeInsets.only(top: 8),
-            //   child: TextField(
-            //     controller: controller.searchController,
-            //     onChanged: (value){
-            //       controller.findStation.value = value;
-            //     },
-            //     decoration: InputDecoration(
-            //         filled: true,
-            //         fillColor: AppColor.darkgrey,
-            //         hintText: '역, 정류장을 검색해주세요.',
-            //         contentPadding: const EdgeInsets.all(20),
-            //         border: InputBorder.none,
-            //         suffixIconColor: Colors.black,
-            //         suffixIcon: IconButton(
-            //             onPressed: () {
-            //               if (controller.findStation.value.isNotEmpty) {
-            //                 controller.findStations();
-            //               }
-            //               // print('${controller.findStations}');
-            //             },
-            //             icon: const Icon(Icons.search))),
-
-            //   ),
-
-            // ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: controller.searchController,
-                      autofocus: true,
-                      onChanged: (value) {
-                        controller.findStation.value = value;
-                        controller.findStations();
-                      },
-                      decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: AppColor.darkgrey,
-                        hintText: '장소, 지명을 검색해주세요.',
-                        contentPadding: EdgeInsets.all(20),
-                        border: InputBorder.none,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: controller.searchController,
+                        autofocus: true,
+                        onSubmitted: (value) {
+                          controller.findStation.value = value;
+                        },
+                        decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            onPressed: () async {
+                              if (controller.findStation.value.isNotEmpty) {
+                                await controller.findStations();
+                              }
+                            },
+                            icon: const Icon(
+                              Icons.search,
+                              size: 20,
+                              color: Colors.black,
+                            ),
+                          ),
+                          filled: true,
+                          fillColor: Colors.grey[200],
+                          hintText: '장소, 지명을 검색해주세요.',
+                          contentPadding: const EdgeInsets.all(20),
+                          border: InputBorder.none,
+                        ),
                       ),
                     ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      if (controller.findStation.value.isNotEmpty) {
-                        controller.findStations();
-                      }
-                    },
-                    icon: const Icon(
-                      Icons.search,
-                      size: 20,
-                      color: AppColor.black,
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Expanded(child: Obx(() {
-              if (controller.findStation.value.isEmpty) {
-                return const SizedBox();
-              } else if (controller.searchResults.isEmpty) {
-                return Text(
-                  '일치하는 식당이 없습니다.',
-                  style: AppTextStyle.koPtBold32(),
-                  textAlign: TextAlign.center,
-                );
-              } else {
-                return ListView.builder(
-                    itemCount: controller.searchResults.length,
-                    itemBuilder: (context, index) {
-                      final restaurant = controller.searchResults[index];
-                      return 
-                  AppButton(
-                      name: restaurant.name ?? '식당 없음', 
-                      onPressed: () {
-                        // // 선택된 District를 업데이트하고 페이지 이동
-                        // controller.updateSelectedDistrict(restaurant);
-                        Get.toNamed(ReviewDetailPage.route,
-                            arguments: restaurant);
+              const SizedBox(
+                height: 16,
+              ),
+              Expanded(
+                child: Obx(() {
+                  if (controller.findStation.value.isNotEmpty &&
+                      controller.searchResults.isEmpty &&
+                      !controller.isSearching.value) {
+                        return const SizedBox();
+                    // return Text(
+                    //   '일치하는 식당이 없습니다.',
+                    //   style: TextStyle(
+                    //     fontSize: 32,
+                    //     fontWeight: FontWeight.bold,
+                    //   ),
+                    //   textAlign: TextAlign.center,
+                    // );
+                  } else {
+                    return ListView.builder(
+                      itemCount: controller.searchResults.length,
+                      itemBuilder: (context, index) {
+                        final restaurant = controller.searchResults[index];
+                        return AppButton(
+                          name: restaurant.name ?? '식당 없음',
+                          onPressed: () {
+                            Get.toNamed(
+                              ReviewDetailPage.route,
+                              arguments: restaurant,
+                            );
+                          },
+                          color: AppColor.black,
+                          style: AppTextStyle.koPtRegular16white(),
+                        );
                       },
-                      color: AppColor.black,
-                      style: AppTextStyle.koPtRegular16white());
-                });
-              }
-            }))
-          ],
+                    );
+                  }
+                }),
+              ),
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }

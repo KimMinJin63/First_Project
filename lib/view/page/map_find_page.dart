@@ -1,11 +1,9 @@
 import 'package:first_project/controller/map_controller.dart';
 import 'package:first_project/util/app_color.dart';
 import 'package:first_project/util/app_textstyle.dart';
-import 'package:first_project/view/page/review_detail_page.dart';
 import 'package:first_project/view/widget/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class MapFindPage extends GetView<MapController> {
   const MapFindPage({super.key});
@@ -58,11 +56,12 @@ class MapFindPage extends GetView<MapController> {
               if (controller.findRestaurants.value.isEmpty) {
                 return const SizedBox();
               } else if (controller.searchResults.isEmpty) {
-                return Text(
-                  '일치하는 식당이 없습니다.',
-                  style: AppTextStyle.koPtBold32(),
-                  textAlign: TextAlign.center,
-                );
+                return const SizedBox();
+                // return Text(
+                //   '일치하는 식당이 없습니다.',
+                //   style: AppTextStyle.koPtBold32(),
+                //   textAlign: TextAlign.center,
+                // );
               } else {
                 return ListView.builder(
                     itemCount: controller.searchResults.length,
@@ -73,10 +72,14 @@ class MapFindPage extends GetView<MapController> {
                           onPressed: () async {
                             print('버튼 눌림');
                             Get.back();
-                            controller.moveToRestaurantLocation(restaurant);
+                            controller.moveToRestaurantLocation(
+                              Scaffold.of(context)
+                                  .context, // or GlobalKey<ScaffoldState>().currentContext
+                              restaurant,
+                            );
                             controller.searchController.clear();
                             controller.searchResults.clear();
-                            controller.searchResults.clear();
+                            // controller.searchResults.clear();
                             print('컨트롤러 작동');
                           }, // name: restaurant.na,
                           // onPressed: () => Get.toNamed(ReviewDetailPage.route,
