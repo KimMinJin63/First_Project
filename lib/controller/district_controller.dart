@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_project/model/district.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DistrictController extends GetxController {
@@ -22,14 +23,19 @@ class DistrictController extends GetxController {
   }
 
  Future<List<District>> findRestaurant(String district, String category) async {
+  try {
     final snapshot = await FirebaseFirestore.instance
         .collection(district) 
         .where('category', isEqualTo: category)
-        // .orderBy('category', descending: false)
-        // .orderBy('name', descending: false)
+        .orderBy('name', descending: false)
         .get();
         print('스냅샷 : $snapshot');
     return snapshot.docs.map((doc) => District.fromSnapshot(doc)).toList();
+    
+  } catch (e) {
+    print(e);
+  }
+  return [];
   }
 
 
