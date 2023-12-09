@@ -36,9 +36,9 @@ class MapController extends GetxController {
 
       int markerId = Random().nextInt(100);
 
-      District restaurant = District(
-          name: name, address: address); // Create a restaurant instance
-      selectedRestaurant = restaurant; // Set the selected restaurant
+      // District restaurant = District(
+      //     name: name, address: address); // Create a restaurant instance
+      // selectedRestaurant = restaurant; // Set the selected restaurant
 
       markers.add(
         Marker(
@@ -345,13 +345,13 @@ class MapController extends GetxController {
                 Flexible(
                   child: Text(
                     restaurant.name!,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Text(restaurant.category!)
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Text(restaurant.address!),
@@ -364,7 +364,7 @@ class MapController extends GetxController {
                     arguments: restaurant,
                   );
                 },
-                child: Text('자세히보기 >>>'))
+                child: const Text('자세히보기 >>>'))
           ],
         ),
       ),

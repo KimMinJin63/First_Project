@@ -25,37 +25,36 @@ class DetailRestaurantPage extends GetView<DistrictController> {
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(name, style: AppTextStyle.koPtBold32()),
-            const SizedBox(
-              height: 8,
-            ),
-            FutureBuilder<List<District>>(
-                future: controller.detailRestaurant(selectedDistrict, name),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(
-                      child: SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(),
-                      ),
-                    );
-                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return Center(
-                      child: Text(
-                        '식당 데이터가 없습니다.\n빠른 시일 내에 업데이트 하겠습니다.',
-                        style: AppTextStyle.koPtBold32(),
-                        textAlign: TextAlign.center,
-                      ),
-                    );
-                  } else {
-                    List<District> restaurants = snapshot.data!;
-                    return SingleChildScrollView(
-                      // scrollDirection: Axis.horizontal,
-                      child: Container(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(name, style: AppTextStyle.koPtBold32()),
+              const SizedBox(
+                height: 8,
+              ),
+              FutureBuilder<List<District>>(
+                  future: controller.detailRestaurant(selectedDistrict, name),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return Center(
+                        child: Text(
+                          '식당 데이터가 없습니다.\n빠른 시일 내에 업데이트 하겠습니다.',
+                          style: AppTextStyle.koPtBold32(),
+                          textAlign: TextAlign.center,
+                        ),
+                      );
+                    } else {
+                      List<District> restaurants = snapshot.data!;
+                      return Container(
                         width: MediaQuery.of(context).size.width,
                         alignment: Alignment.bottomLeft,
                         decoration: BoxDecoration(color: AppColor.black),
@@ -115,15 +114,15 @@ class DetailRestaurantPage extends GetView<DistrictController> {
                             }).toList(),
                           ),
                         ),
-                      ),
-                    );
-                  }
-                }),
-            const SizedBox(
-              height: 32,
-            ),
-            Text('리뷰', style: AppTextStyle.koPtBold32()),
-          ],
+                      );
+                    }
+                  }),
+              const SizedBox(
+                height: 32,
+              ),
+              Text('리뷰', style: AppTextStyle.koPtBold32()),
+            ],
+          ),
         ),
       )),
     );
