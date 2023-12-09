@@ -18,7 +18,7 @@ class AppBottomNavigate extends StatelessWidget {
       items: [
         BottomNavigationBarItem(icon: Icon(Icons.restaurant), label: '식당'),
         BottomNavigationBarItem(icon: Icon(Icons.location_on), label: '위치'),
-        BottomNavigationBarItem(icon: Icon(Icons.favorite), label: '찜' ),
+        // BottomNavigationBarItem(icon: Icon(Icons.favorite), label: '찜' ),
         BottomNavigationBarItem(icon: Icon(Icons.person), label: '마이페이지')
       ],
     );

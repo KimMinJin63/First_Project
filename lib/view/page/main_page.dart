@@ -22,7 +22,7 @@ class MainPage extends GetView<MainController> {
             children: [
               MainScreen(),
               SearchScreen(),
-              LikeScreen(),
+              // LikeScreen(),
               MyScreen()
             ],
           ),

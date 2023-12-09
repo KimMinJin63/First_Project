@@ -7,12 +7,12 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapPage extends GetView<MapController> {
-  const MapPage({super.key});
+  const MapPage({Key? key}) : super(key: key);
+
   static const route = '/mapPage';
 
   @override
   Widget build(BuildContext context) {
-    GoogleMapController? mapController;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
@@ -38,7 +38,7 @@ class MapPage extends GetView<MapController> {
                   icon: const Icon(
                     Icons.search,
                     size: 20,
-                    color: AppColor.white,
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -55,20 +55,28 @@ class MapPage extends GetView<MapController> {
                 zoom: 16,
                 target: LatLng(35.883464, 128.630775),
               ),
-              onTap: (coordinate) {
-                // mapController 변수를 사용
-                if (mapController != null) {
-                  mapController!
-                      .animateCamera(CameraUpdate.newLatLng(coordinate));
-                }
-              },
-              onMapCreated: (controllers) {
-                // 전역 변수에 할당
-                mapController = controllers;
-                // MapController의 onMapCreated 메서드 호출
-                controller.onMapCreated(controllers);
-              },
+              // onMapCreated: (controller) {
+              //   // MapController의 onMapCreated 메서드 호출
+              //   controller.onMapCreated(controller);
+              // },
               markers: controller.markers.toSet(),
+            ),
+          ),
+          // 추가: 마커를 눌렀을 때 바텀 시트를 띄우는 GestureDetector
+          GestureDetector(
+            onTap: () {
+              if (controller.selectedRestaurant != null) {
+                // 마커를 탭하면 해당 레스토랑 정보로 바텀 시트를 엽니다.
+                controller.openBottomSheet(context, controller.selectedRestaurant!);
+              }
+            },
+            child: Align(
+              alignment: Alignment.center,
+              child: Icon(
+                Icons.place,
+                color: Colors.red,
+                size: 40.0,
+              ),
             ),
           ),
         ],

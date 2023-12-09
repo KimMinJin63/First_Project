@@ -25,9 +25,10 @@ class DistrictController extends GetxController {
     final snapshot = await FirebaseFirestore.instance
         .collection(district) 
         .where('category', isEqualTo: category)
-        // .orderBy('category')
-        // .orderBy('name', descending: true)
+        // .orderBy('category', descending: false)
+        // .orderBy('name', descending: false)
         .get();
+        print('스냅샷 : $snapshot');
     return snapshot.docs.map((doc) => District.fromSnapshot(doc)).toList();
   }
 
@@ -37,6 +38,7 @@ class DistrictController extends GetxController {
     final snapshot = await FirebaseFirestore.instance
         .collection(distrct) // Change 'restaurants' to your collection name
         .where('name', isEqualTo: name)
+        // .orderBy('name', descending: true)
         .get();
 
     return snapshot.docs.map((doc) => District.fromSnapshot(doc)).toList();

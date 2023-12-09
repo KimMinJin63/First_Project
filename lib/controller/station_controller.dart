@@ -29,6 +29,7 @@ class StationController extends GetxController {
             .collection(collectionName)
             .where('subway', isGreaterThanOrEqualTo: findStation.value)
             .where('subway', isLessThanOrEqualTo: '${findStation.value}\uf8ff')
+            .where('subway', arrayContains: findStation.value)
             // .where('subway', isGreaterThan: findStation.value)
             // .where('subway', isLessThan: '' + findStation.value + '역')
             // .where('subway', arrayContains: findStation.value)

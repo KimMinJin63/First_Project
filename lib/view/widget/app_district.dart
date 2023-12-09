@@ -1,12 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import 'package:first_project/controller/district_controller.dart';
 import 'package:first_project/util/app_color.dart';
 import 'package:first_project/util/app_textstyle.dart';
 import 'package:first_project/view/widget/app_button.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:get/get.dart';
 
 class AppDistrict extends GetView<DistrictController> {
   const AppDistrict(this.name, this.district, this.url, this.onPressed, {super.key});
@@ -17,6 +18,21 @@ class AppDistrict extends GetView<DistrictController> {
 
   @override
   Widget build(BuildContext context) {
+// return Padding(
+//       padding: const EdgeInsets.only(bottom: 16),
+//       child: ElevatedButton(
+//         onPressed: onPressed(district),
+//         style: ElevatedButton.styleFrom(
+//             backgroundColor: AppColor.black,
+//             minimumSize: const Size.fromHeight(55),
+//             shape: RoundedRectangleBorder(
+//               borderRadius: BorderRadius.circular(8),
+//             )),
+//         child: Text(name, style: AppTextStyle.koPtSemiBold20white()),
+//       ),
+//     );
+
+
     return AppButton(
       name: name,
       style: AppTextStyle.koPtSemiBold20white(),
