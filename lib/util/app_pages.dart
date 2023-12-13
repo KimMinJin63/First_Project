@@ -131,20 +131,17 @@ class AppPages {
         name: AppRoutes.membershipWithdrawal,
         page: () => const MembershipWithdrawalPage(),
         transition: Transition.fadeIn),
-            GetPage(
+    GetPage(
         name: AppRoutes.category,
         page: () => const CategoryRestaurantPage(),
         transition: Transition.fadeIn),
-                    GetPage(
+    GetPage(
         name: AppRoutes.review,
         page: () => const ReviewPage(),
         transition: Transition.fadeIn),
-                            GetPage(
+    GetPage(
         name: AppRoutes.reviewDetail,
         page: () => const ReviewDetailPage(),
         transition: Transition.fadeIn)
-
-
-
   ];
 }

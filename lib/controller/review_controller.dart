@@ -77,19 +77,21 @@ class ReviewController extends GetxController {
     return results;
   }
 
-  Future<void> fetchMessages(
-      List<String> collections, String restaurantName) async {
+  Future<List<Message>> fetchMessages(
+      List<String> collections, District restaurant) async {
     try {
       final FirebaseFirestore firestore = FirebaseFirestore.instance;
       final List<QuerySnapshot> querySnapshots = [];
 
       for (var collectionName in collections) {
-        final myCollection = firestore
+        final myCollection = await firestore
             .collection(collectionName)
-            .doc(restaurantName)
-            .collection('messages');
-        final querySnapshot = await myCollection.get();
-        querySnapshots.add(querySnapshot);
+            .doc(restaurant.cnt)
+            .collection('messages')
+            .orderBy('sendDate', descending: true) // sendDate를 기준으로 내림차순으로 정렬
+            .limit(2)
+            .get();
+        querySnapshots.add(myCollection);
       }
 
       final data = <Message>[];
@@ -102,14 +104,14 @@ class ReviewController extends GetxController {
           final DateTime sendDate = sendDateTimestamp.toDate();
           final DocumentSnapshot refDocSnapshot = await docRef.get();
           final String name = refDocSnapshot.get('name') as String;
-          String? photoUrl = refDocSnapshot.get('photoUrl') as String?;
-          if (photoUrl == null) {
-            print('null 입니다.');
-          }
+          // String? photoUrl = refDocSnapshot.get('photoUrl') as String?;
+          // if (photoUrl == null) {
+          //   print('null 입니다.');
+          // }
           data.add(Message(
               content: content,
               sendDate: sendDate,
-              myInfo: MyInfo(name: name, photoUrl: photoUrl)));
+              myInfo: MyInfo(name: name)));
         }
       }
       data.sort((a, b) => -a.sendDate.compareTo(b.sendDate));
@@ -120,9 +122,10 @@ class ReviewController extends GetxController {
       // Handle error
       rethrow;
     }
+    return messages;
   }
 
-  void onPressedButton(List<String> collections, String restaurantName) {
+  void onPressedButton(List<String> collections, District restaurant) {
     try {
       final FirebaseFirestore firestore = FirebaseFirestore.instance;
       final DocumentReference docRef =
@@ -137,18 +140,18 @@ class ReviewController extends GetxController {
       for (var collectionName in collections) {
         FirebaseFirestore.instance
             .collection(collectionName)
-            .doc(
-                restaurantName) // Assuming 'restaurantName' is the document ID of the restaurant
+            .doc(restaurant
+                .cnt) // Assuming 'restaurantName' is the document ID of the restaurant
             .collection('messages')
             .add(data);
       }
 
       textEditingController.clear();
-      fetchMessages(collections, restaurantName);
+      fetchMessages(collections, restaurant);
     } catch (e) {
       print('Error adding message: $e');
     }
   }
 
-  streamMessages(List<String> collections, cnt) {}
+  // streamMessages(List<String> collections, cnt) {}
 }

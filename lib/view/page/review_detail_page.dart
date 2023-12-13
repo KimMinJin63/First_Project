@@ -112,44 +112,46 @@ class ReviewDetailPage extends GetView<ReviewController> {
                   Text('리뷰', style: AppTextStyle.koPtBold32()),
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height / 5,
+                    height: MediaQuery.of(context).size.height / 3,
                     child: Column(
-                      children: [
-                        FutureBuilder<List<Message>>(
-                            future: controller.streamMessages(
-                                collections, restaurant.cnt),
-                            builder: (context, asyncSnapshot) {
-                              if (asyncSnapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return const CircularProgressIndicator(); // 연결 중이면 로딩 표시
-                              } else if (!asyncSnapshot.hasData) {
-                                return const Text('데이터가 없습니다.'); // 데이터 없음
-                              } else if (asyncSnapshot.hasError) {
-                                return const Text('Error adding message: $e');
-                              } else {
-                                List<Message> messages = asyncSnapshot.data!;
-                                print('Received messages: $messages');
-                                return Expanded(
-                                  child: ListView.builder(
-                                    primary: false,
-                                    reverse: true,
-                                    physics: const BouncingScrollPhysics(),
-                                    padding: EdgeInsets.zero,
-                                    itemCount: messages.length,
-                                    itemBuilder: (context, index) {
-                                      return Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 25),
-                                        child: ReviewCard(
-                                            message: messages[index]),
-                                      );
-                                    },
-                                  ),
-                                );
-                              }
-                            })
-                      ],
-                    ),
+                        children: [
+                          FutureBuilder<List<Message>>(
+                              future: controller.fetchMessages(collections, restaurant),
+                              builder: (context, asyncSnapshot) {
+                                if (asyncSnapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const CircularProgressIndicator(); // 연결 중이면 로딩 표시
+                                } else if (!asyncSnapshot.hasData) {
+                                  return const Text('데이터가 없습니다.'); // 데이터 없음
+                                } else if (asyncSnapshot.hasError) {
+                                  return const Text('Error adding message: $e');
+                                } else {
+                                  List<Message> messages = asyncSnapshot.data!;
+                                  print('Received messages: $messages');
+                                  return Obx(
+                                   () => Expanded(
+                                      child: ListView.builder(
+                                        primary: false,
+                                        reverse: true,
+                                        physics: const BouncingScrollPhysics(),
+                                        padding: EdgeInsets.zero,
+                                        itemCount: messages.length,
+                                        itemBuilder: (context, index) {
+                                          return Padding(
+                                            padding:
+                                                const EdgeInsets.only(bottom: 25),
+                                            child: ReviewCard(
+                                                message: messages[index], district: collections,),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  );
+                                }
+                              })
+                        ],
+                      ),
+                
                   ),
                   Row(
                     children: [
@@ -162,7 +164,7 @@ class ReviewDetailPage extends GetView<ReviewController> {
                               suffixIcon: IconButton(
                                   onPressed: () {
                                     controller.onPressedButton(
-                                        collections, restaurant.cnt);
+                                        collections, restaurant);
                                   },
                                   icon: const Icon(
                                     Icons.send,
