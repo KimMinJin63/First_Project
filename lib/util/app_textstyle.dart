@@ -55,4 +55,10 @@ class AppTextStyle {
 
   static TextStyle koPtRegular14() => const TextStyle(
       fontFamily: 'PretendardRegular', fontSize: 14, color: AppColor.black);
+
+  static TextStyle koPtRegular14white() => const TextStyle(
+      fontFamily: 'PretendardRegular', fontSize: 14, color: AppColor.white);
+
+  static TextStyle koPtRegular14grey() => const TextStyle(
+      fontFamily: 'PretendardRegular', fontSize: 14, color: AppColor.grey);
 }

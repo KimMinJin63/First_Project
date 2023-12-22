@@ -14,44 +14,94 @@ class ReviewController extends GetxController {
   TextEditingController searchController = TextEditingController();
   TextEditingController textEditingController = TextEditingController();
   User user = Get.find<AuthController>().user!;
+  RxString selectedDistrict = ''.obs;
+  List selectedRestaurant = [];
+  // RxString selectedRestaurantCnt = ''.obs;
+
+  // findRestaurant() async {
+  //   if (findName.value.isNotEmpty) {
+  //     List<QuerySnapshot> snapshots = [];
+
+  //      selectedRestaurant.clear();
+
+  //     for (var collectionName in [
+  //       '동구',
+  //       '서구',
+  //       '남구',
+  //       '북구',
+  //       '중구',
+  //       '달서구',
+  //       '수성구',
+  //       '달성군',
+  //     ]) {
+  //       QuerySnapshot snapshot = await FirebaseFirestore.instance
+  //           .collection(collectionName)
+  //           .where('name', isEqualTo: findName.value)
+  //           .get();
+  //       snapshots.add(snapshot);
+  //       selectedRestaurant.add(snapshot);
+  //       print('뭐가 뜰까? : ${selectedRestaurant.length}');
+  //     }
+  //     List<District> results = [];
+  //     for (var snap in snapshots) {
+  //       results.addAll(
+  //         snap.docs.map((doc) => District.fromSnapshot(doc)),
+  //       );
+  //     }
+  //     if (results.isEmpty) {
+  //       print('일치하는 결과가 없습니다.');
+  //       searchResults.clear();
+  //     } else {
+  //       print('일치하는 결과를 찾았습니다: $results');
+  //       searchResults.assignAll(results);
+  //     }
+  //   } else {
+  //     searchResults.clear();
+  //   }
+  // }
+
 
   findRestaurant() async {
-    if (findName.value.isNotEmpty) {
-      List<QuerySnapshot> snapshots = [];
+  if (findName.value.isNotEmpty) {
+    // Clear the existing results before processing new ones
+    selectedRestaurant.clear();
 
-      for (var collectionName in [
-        '동구',
-        '서구',
-        '남구',
-        '북구',
-        '중구',
-        '달서구',
-        '수성구',
-        '달성군',
-      ]) {
-        QuerySnapshot snapshot = await FirebaseFirestore.instance
-            .collection(collectionName)
-            .where('name', isEqualTo: findName.value)
-            .get();
-        snapshots.add(snapshot);
-      }
-      List<District> results = [];
-      for (var snap in snapshots) {
-        results.addAll(
-          snap.docs.map((doc) => District.fromSnapshot(doc)),
-        );
-      }
-      if (results.isEmpty) {
-        print('일치하는 결과가 없습니다.');
-        searchResults.clear();
-      } else {
-        print('일치하는 결과를 찾았습니다: $results');
-        searchResults.assignAll(results);
-      }
-    } else {
-      searchResults.clear();
+    for (var collectionName in [
+      '동구',
+      '서구',
+      '남구',
+      '북구',
+      '중구',
+      '달서구',
+      '수성구',
+      '달성군',
+    ]) {
+      QuerySnapshot snapshot = await FirebaseFirestore.instance
+          .collection(collectionName)
+          .where('name', isEqualTo: findName.value)
+          .get();
+
+      // Extract the documents from the snapshot and add them to selectedRestaurant
+      selectedRestaurant.addAll(snapshot.docs);
+
+      print('뭐가 뜰까? : ${selectedRestaurant.length}');
     }
+
+    List<District> results = selectedRestaurant.map((doc) => District.fromSnapshot(doc)).toList();
+
+    if (results.isEmpty) {
+      print('일치하는 결과가 없습니다.');
+      searchResults.clear();
+    } else {
+      print('일치하는 결과를 찾았습니다: $results');
+      searchResults.assignAll(results);
+    }
+  } else {
+    // Clear the results if the search name is empty
+    searchResults.clear();
   }
+}
+
 
   Future<List<District>> detailRestaurant(String name) async {
     List<District> results = [];
@@ -83,18 +133,21 @@ class ReviewController extends GetxController {
       final FirebaseFirestore firestore = FirebaseFirestore.instance;
       final List<QuerySnapshot> querySnapshots = [];
 
-      for (var collectionName in collections) {
-        final myCollection = await firestore
-            .collection(collectionName)
-            .doc(restaurant.cnt)
-            .collection('messages')
-            .orderBy('sendDate', descending: true) // sendDate를 기준으로 내림차순으로 정렬
-            .limit(2)
-            .get();
-        querySnapshots.add(myCollection);
-      }
+      // for (var collectionName in collections) {
+      final myCollection = await firestore
+          .collection(selectedDistrict.value)
+          .doc(restaurant.cnt)
+          .collection('messages')
+          .orderBy('sendDate', descending: true) // sendDate를 기준으로 내림차순으로 정렬
+          .limit(2)
+          .get();
+      // print('여기는??? : ${myCollection.docs.}');
+      querySnapshots.add(myCollection);
+      print('여긴 몇개? : ${querySnapshots.length}');
+      // }
 
       final data = <Message>[];
+
       for (var querySnapshot in querySnapshots) {
         final docs = querySnapshot.docs;
         for (final doc in docs) {
@@ -104,14 +157,11 @@ class ReviewController extends GetxController {
           final DateTime sendDate = sendDateTimestamp.toDate();
           final DocumentSnapshot refDocSnapshot = await docRef.get();
           final String name = refDocSnapshot.get('name') as String;
-          // String? photoUrl = refDocSnapshot.get('photoUrl') as String?;
-          // if (photoUrl == null) {
-          //   print('null 입니다.');
-          // }
           data.add(Message(
               content: content,
               sendDate: sendDate,
               myInfo: MyInfo(name: name)));
+          print('이건 몇개? : ${data.length}');
         }
       }
       data.sort((a, b) => -a.sendDate.compareTo(b.sendDate));
@@ -140,8 +190,7 @@ class ReviewController extends GetxController {
       for (var collectionName in collections) {
         FirebaseFirestore.instance
             .collection(collectionName)
-            .doc(restaurant
-                .cnt) // Assuming 'restaurantName' is the document ID of the restaurant
+            .doc(restaurant.cnt)
             .collection('messages')
             .add(data);
       }

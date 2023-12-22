@@ -22,14 +22,13 @@ class ReviewCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Text(message.myInfo.name, style: AppTextStyle.koPtSemiBold20white()),
-              ],
-            ),
-            Text(message.content, style: TextStyle(color: Colors.white),),
-            Text(DateFormat("yyyy.MM.dd").format(message.sendDate), style: AppTextStyle.koPtRegular16white()),
+            Text(message.myInfo.name, style: AppTextStyle.koPtSemiBold20white()),
+            Text(message.content, style: AppTextStyle.koPtRegular18white(),),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Text(DateFormat("yyyy.MM.dd").format(message.sendDate), style: AppTextStyle.koPtRegular14grey())),
           ],
         ),
       ),
