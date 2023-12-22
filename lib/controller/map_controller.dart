@@ -100,7 +100,68 @@ class MapController extends GetxController {
     }
   }
 
-  Future<void> getMarkerData() async {
+
+// Future<void> getMarkerData(double userLatitude, double userLongitude) async {
+//   try {
+//     double radiusInKm = 5.0;
+
+//     for (var collectionName in [
+//       '동구',
+//       '서구',
+//       '남구',
+//       '북구',
+//       '중구',
+//       '달서구',
+//       '수성구',
+//       '달성군',
+//     ]) {
+//       QuerySnapshot snapshot = await FirebaseFirestore.instance
+//           .collection(collectionName)
+//           .where('location',
+//               isGreaterThanOrEqualTo: getMinPoint(
+//                   userLatitude, userLongitude, radiusInKm))
+//           .where('location',
+//               isLessThanOrEqualTo: getMaxPoint(
+//                   userLatitude, userLongitude, radiusInKm))
+//           .get();
+          
+
+//       print('지도 스냅샷 : ${snapshot.docs}');
+//       if (snapshot.docs.isNotEmpty) {
+//         for (int i = 0; i < snapshot.docs.length; i++) {
+//           Map<String, dynamic> data =
+//               (snapshot.docs[i].data() as Map<String, dynamic>);
+//           String address = data['address'] ?? '주소 없음';
+//           String name = data['name'] ?? '이름 없음';
+//           print('이름 : $name');
+//           print('주소 : $address');
+
+//           // 여기서 원하는 작업 수행
+//           await initMarkerFromAddress(address, name);
+//         }
+//       }
+//     }
+//   } catch (e) {
+//     print("Error getting location: $e");
+//   }
+// }
+
+// GeoPoint getMinPoint(double latitude, double longitude, double radiusInKm) {
+//   double latOffset = radiusInKm / 110.54;
+//   double lonOffset = radiusInKm / (111.320 * cos(latitude));
+//   double minLat = latitude - latOffset;
+//   double minLon = longitude - lonOffset;
+//   return GeoPoint(minLat, minLon);
+// }
+
+// GeoPoint getMaxPoint(double latitude, double longitude, double radiusInKm) {
+//   double latOffset = radiusInKm / 110.54;
+//   double lonOffset = radiusInKm / (111.320 * cos(latitude));
+//   double maxLat = latitude + latOffset;
+//   double maxLon = longitude + lonOffset;
+//   return GeoPoint(maxLat, maxLon);
+// }
+Future<void> getMarkerData() async {
     for (var collectionName in [
       '동구',
       '서구',
@@ -128,6 +189,34 @@ class MapController extends GetxController {
       }
     }
   }
+  // Future<void> getMarkerData() async {
+  //   for (var collectionName in [
+  //     '동구',
+  //     '서구',
+  //     '남구',
+  //     '북구',
+  //     '중구',
+  //     '달서구',
+  //     '수성구',
+  //     '달성군',
+  //   ]) {
+  //     QuerySnapshot snapshot =
+  //         await FirebaseFirestore.instance.collection(collectionName).get();
+  //     print('지도 스냅샷 : ${snapshot.docs}');
+  //     if (snapshot.docs.isNotEmpty) {
+  //       for (int i = 0; i < snapshot.docs.length; i++) {
+  //         Map<String, dynamic> data =
+  //             (snapshot.docs[i].data() as Map<String, dynamic>);
+  //         String address = data['address'] ?? '주소 없음';
+  //         String name = data['name'] ?? '이름 없음';
+  //         print('이름 : $name');
+  //         print('주소 : $address');
+
+  //         await initMarkerFromAddress(address, name);
+  //       }
+  //     }
+  //   }
+  // }
 
 //식당 검색시 결과 보여주는 코드
   findRestaurant() async {
@@ -244,6 +333,7 @@ class MapController extends GetxController {
   @override
   void onInit() {
     getMarkerData();
+    // getMarkerData(35.883464, 128.630775);
     print('onInit 호출');
     super.onInit();
   }

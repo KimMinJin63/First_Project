@@ -25,13 +25,35 @@ class MyScreen extends GetView<AuthController> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    CircleAvatar(
-                      radius: 50,
-                    ),
+                    Stack(children: [
+                      Obx(
+                        () => CircleAvatar(
+                          radius: 50,
+                          backgroundImage: controller.profileUrl.value != null
+                              ? NetworkImage(controller.profileUrl.value!)
+                              : const AssetImage('assets/images/logo.jpeg')
+                                  as ImageProvider<Object>?,
+                        ),
+                      ),
+                      Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: GestureDetector(
+                            onTap: controller.openBottomSheet,
+                            child: Badge(
+                              largeSize: 30,
+                              backgroundColor: AppColor.white,
+                              label: Icon(Icons.edit),
+                            ),
+                          ))
+                    ]),
                     const SizedBox(
                       width: 16,
                     ),
-                    Text('molly63@naver.com', style: AppTextStyle.koPtRegular18white(),)
+                    Text(
+                      'molly63@naver.com',
+                      style: AppTextStyle.koPtRegular18white(),
+                    )
                   ],
                 ),
               ),
@@ -112,13 +134,17 @@ class MyScreen extends GetView<AuthController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     '버전',
                                     style: AppTextStyle.koPtRegular18white(),
                                   ),
-                                  Text('1.0.0', style: AppTextStyle.koPtRegular18white(),)
+                                  Text(
+                                    '1.0.0',
+                                    style: AppTextStyle.koPtRegular18white(),
+                                  )
                                 ],
                               ),
                               const Divider(
@@ -132,18 +158,16 @@ class MyScreen extends GetView<AuthController> {
                                   '로그아웃',
                                   style: AppTextStyle.koPtRegular18white(),
                                 ),
-                                onTap: () => Get.dialog(
-                                  AppDialogs(
-                                    textBold: '로그아웃', 
+                                onTap: () => Get.dialog(AppDialogs(
+                                    textBold: '로그아웃',
                                     style: AppTextStyle.koPtBold16(),
-                                    textRegular: '을 하시겠습니까?', 
-                                    cancelText: '아니오', 
-                                    onConfirm: ()=> controller.logout(),
+                                    textRegular: '을 하시겠습니까?',
+                                    cancelText: '아니오',
+                                    onConfirm: () => controller.logout(),
                                     onCancel: () => Get.back(),
-                                    confirmText: '네')
-                                ),
+                                    confirmText: '네')),
                               ),
-                             const Divider(
+                              const Divider(
                                 thickness: 1,
                                 indent: 7,
                                 endIndent: 7,
@@ -154,7 +178,8 @@ class MyScreen extends GetView<AuthController> {
                                   '회원탈퇴',
                                   style: AppTextStyle.koPtRegular18white(),
                                 ),
-                                onTap: () => Get.toNamed(MembershipWithdrawalPage.route),
+                                onTap: () =>
+                                    Get.toNamed(MembershipWithdrawalPage.route),
                               )
                             ],
                           ),

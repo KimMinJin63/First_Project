@@ -2,6 +2,7 @@ import 'package:first_project/controller/map_controller.dart';
 import 'package:first_project/model/district.dart';
 import 'package:first_project/util/app_color.dart';
 import 'package:first_project/view/page/map_find_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -72,6 +73,30 @@ class MapPage extends GetView<MapController> {
               markers: controller.markers.toSet(),
             ),
           ),
+          Positioned(
+              left: Get.size.width / 3.5,
+          bottom: 20,
+              child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      print('버튼 눌림');
+                      // 사용자의 현재 위치를 얻어오는 로직 (예: geolocator 패키지 사용)
+                      
+                      double userLatitude = 35.883464;
+                      double userLongitude =  128.630775;
+
+                      // MapController의 getMarkerData 메서드 호출
+                      controller.getMarkerData();
+                      // controller.getMarkerData(userLatitude, userLongitude);
+                    },
+                    child: Obx(() => controller.isLoading.value
+                        ? const CupertinoActivityIndicator() // 로딩 중인 경우 표시
+                        : const Text(
+                            '주변 가까운 충전소',
+                            style: TextStyle(color: Colors.white),
+                          )),
+                  )))
           // 추가: 마커를 눌렀을 때 바텀 시트를 띄우는 GestureDetector
           // GestureDetector(
           //   onTap: () {

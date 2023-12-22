@@ -112,7 +112,7 @@ class ReviewDetailPage extends GetView<ReviewController> {
                   Text('리뷰', style: AppTextStyle.koPtBold32()),
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height / 3,
+                    height: MediaQuery.of(context).size.height/2,
                     child: Column(
                         children: [
                           FutureBuilder<List<Message>>(
@@ -127,10 +127,12 @@ class ReviewDetailPage extends GetView<ReviewController> {
                                   return const Text('Error adding message: $e');
                                 } else {
                                   List<Message> messages = asyncSnapshot.data!;
+                                  print('메세지 수 : ${messages.length}');
                                   print('Received messages: $messages');
                                   return Obx(
                                    () => Expanded(
                                       child: ListView.builder(
+                                        shrinkWrap: true,
                                         primary: false,
                                         reverse: true,
                                         physics: const BouncingScrollPhysics(),
@@ -151,7 +153,7 @@ class ReviewDetailPage extends GetView<ReviewController> {
                               })
                         ],
                       ),
-                
+                                  
                   ),
                   Row(
                     children: [
