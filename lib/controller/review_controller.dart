@@ -117,7 +117,7 @@ class ReviewController extends GetxController {
     ]) {
       QuerySnapshot snapshot = await FirebaseFirestore.instance
           .collection(collectionName)
-          .where('name', isEqualTo: name)
+          .where('BZ_NM', isEqualTo: name)
           .get();
 
       results.addAll(

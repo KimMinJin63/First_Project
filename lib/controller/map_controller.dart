@@ -42,13 +42,13 @@ class MapController extends GetxController {
 
       markers.add(
         Marker(
-            // onTap: () {
-            //   print('눌리니?');
-            //   Get.to(
-            //     MarkerDetailPage.route,
-            //     arguments: restaurant, // 이 부분이 추가된 부분
-            //   );
-            // },
+          // onTap: () {
+          //   print('눌리니?');
+          //   Get.to(
+          //     MarkerDetailPage.route,
+          //     arguments: restaurant, // 이 부분이 추가된 부분
+          //   );
+          // },
           markerId: MarkerId(markerId.toString()),
           position: LatLng(latitude, longitude),
           infoWindow: InfoWindow(
@@ -100,7 +100,6 @@ class MapController extends GetxController {
     }
   }
 
-
 // Future<void> getMarkerData(double userLatitude, double userLongitude) async {
 //   try {
 //     double radiusInKm = 5.0;
@@ -124,7 +123,6 @@ class MapController extends GetxController {
 //               isLessThanOrEqualTo: getMaxPoint(
 //                   userLatitude, userLongitude, radiusInKm))
 //           .get();
-          
 
 //       print('지도 스냅샷 : ${snapshot.docs}');
 //       if (snapshot.docs.isNotEmpty) {
@@ -161,7 +159,7 @@ class MapController extends GetxController {
 //   double maxLon = longitude + lonOffset;
 //   return GeoPoint(maxLat, maxLon);
 // }
-Future<void> getMarkerData() async {
+  Future<void> getMarkerData() async {
     for (var collectionName in [
       '동구',
       '서구',
@@ -179,8 +177,8 @@ Future<void> getMarkerData() async {
         for (int i = 0; i < snapshot.docs.length; i++) {
           Map<String, dynamic> data =
               (snapshot.docs[i].data() as Map<String, dynamic>);
-          String address = data['address'] ?? '주소 없음';
-          String name = data['name'] ?? '이름 없음';
+          String address = data['GNG_CS'] ?? '주소 없음';
+          String name = data['BZ_NM'] ?? '이름 없음';
           print('이름 : $name');
           print('주소 : $address');
 
@@ -235,8 +233,8 @@ Future<void> getMarkerData() async {
       ]) {
         QuerySnapshot snapshot = await FirebaseFirestore.instance
             .collection(collectionName)
-            .where('name', isGreaterThanOrEqualTo: findRestaurants.value)
-            .where('name',
+            .where('BZ_NM', isGreaterThanOrEqualTo: findRestaurants.value)
+            .where('BZ_NM',
                 isLessThanOrEqualTo: '${findRestaurants.value}\uf8ff')
             .get();
         snapshots.add(snapshot);
@@ -300,10 +298,13 @@ Future<void> getMarkerData() async {
       if (latLng != null) {
         double latitude = latLng['latitude'];
         double longitude = latLng['longitude'];
+        print('_______?$latitude');
+        print('_______?$longitude');
         await moveToLocation(latitude, longitude);
+        print('여기는 타나요???');
         openBottomSheet(context, restaurant);
         // openDialog(context, restaurant);
-        print('-------------- $latLng');
+        print('--------------!! $latLng');
       } else {
         print('주소 변환 결과가 null입니다.');
       }
@@ -415,6 +416,10 @@ Future<void> getMarkerData() async {
   //   });
   // }
   void openBottomSheet(BuildContext context, District restaurant) {
+    print('제발 여기는 뭐가 뜨는지 알려줘 : ${restaurant.category}');
+    print('제발 여기는 뭐가 뜨는지 알려줘 : ${restaurant.address}');
+    print('제발 여기는 뭐가 뜨는지 알려줘 : ${restaurant.telNum}');
+    print('제발 여기는 뭐가 뜨는지 알려줘 : ${restaurant.time}');
     // Future.delayed(Duration.zero, () {
     Get.bottomSheet(Container(
       height: 230,
@@ -426,36 +431,41 @@ Future<void> getMarkerData() async {
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         // height: 200,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  child: Text(
-                    restaurant.name!,
-                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [          
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    child: Text(
+                      restaurant.name ?? '',
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
                   ),
-                ),
-                Text(restaurant.category!)
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Text(restaurant.address!),
-            Text(restaurant.telNum!),
-            Text(restaurant.time!),
-            TextButton(
-                onPressed: () {
-                  Get.toNamed(
-                    MarkerDetailPage.route,
-                    arguments: restaurant,
-                  );
-                },
-                child: const Text('자세히보기 >>>'))
-          ],
+                  Text(restaurant.category ?? '')
+                ],
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Text(restaurant.address ?? ''),
+              Text(restaurant.telNum ?? ''),
+              Text(restaurant.time ?? ''),
+              TextButton(
+                  onPressed: () {
+                    print('그럼 여기는 타나요???');
+          
+                    Get.toNamed(
+                      MarkerDetailPage.route,
+                      arguments: restaurant,
+                    );
+                  },
+                  child: const Text('자세히보기 >>>'))
+            ],
+          ),
         ),
       ),
     ));

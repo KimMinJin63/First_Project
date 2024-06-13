@@ -32,32 +32,32 @@ class District {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'cnt': cnt,
-      'address': address,
-      'category': category,
-      'name': name,
-      'telNum': telNum,
-      'time': time,
-      'menu': menu,
-      'booking': booking,
-      'parking': parking,
-      'subway': subway,
-      'bus': bus,
+      'GNG_CS': address,
+      'FD_CS': category,
+      'BZ_NM': name,
+      'TLNO': telNum,
+      'MBZ_HR': time,
+      'MNU': menu,
+      'BKN_YN': booking,
+      'PKPL': parking,
+      'SBW': subway,
+      'BUS': bus,
     };
   }
 
   factory District.fromMap(Map<String, dynamic> map) {
     return District(
       cnt: map['cnt'] as String,
-      address: map['address'] as String,
-      category: map['category'] as String,
-      name: map['name'] as String,
-      telNum: map['telNum'] as String,
-      time: map['time'] as String,
-      menu: map['menu'] as String,
-      booking: map['booking'] as String,
-      parking: map['parking'] as String,
-      subway: map['subway'] as String,
-      bus: map['bus'] as String,
+      address: map['GNG_CS'] as String,
+      category: map['FD_CS'] as String,
+      name: map['BZ_NM'] as String,
+      telNum: map['TLNO'] as String,
+      time: map['MBZ_HR'] as String,
+      menu: map['MNU'] as String,
+      booking: map['BKN_YN'] as String,
+      parking: map['PKPL'] as String,
+      subway: map['SBW'] as String,
+      bus: map['BUS'] as String,
     );
   }
 
@@ -69,18 +69,16 @@ class District {
     final data = snapshot.data() as Map<String, dynamic>;
     return District(
       cnt: data['cnt'] ?? '',
-      address: data['address'] ?? '',
-      category: data['category'] ?? '',
-      telNum: data['telNum'] ?? '',
-      time: data['time'] ?? '',
-      menu: data['menu'] ?? '',
-      booking: data['booking'] ?? '',
-      parking: data['parking'] ?? '',
-      subway: data['subway'] ?? '',
-      bus: data['bus'] ?? '',
-
-      // Add other fields here...
-      name: data['name'] ?? '', // Example for 'name' field
+      address: data['GNG_CS'] ?? '',
+      category: data['FD_CS'] ?? '',
+      telNum: data['TLNO'] ?? '',
+      time: data['MBZ_HR'] ?? '',
+      menu: data['MNU'] ?? '',
+      booking: data['BKN_YN'] ?? '',
+      parking: data['PKPL'] ?? '',
+      subway: data['SBW'] ?? '',
+      bus: data['BUS'] ?? '',
+      name: data['BZ_NM'] ?? '', 
     );
   }
 }

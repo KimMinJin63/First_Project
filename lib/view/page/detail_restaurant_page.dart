@@ -13,9 +13,13 @@ class DetailRestaurantPage extends GetView<DistrictController> {
 
   @override
   Widget build(BuildContext context) {
-    final args = Get.arguments as Map<String, dynamic>;
-    final selectedDistrict = args['district'];
-    final name = args['name'];
+    final selectedDistrict = Get.arguments != null ? Get.arguments[0] : '';
+    final name = Get.arguments != null ? Get.arguments[1] : '';
+    // final args = Get.arguments as Map<String, dynamic>;
+    // final selectedDistrict = args['GNG_CS'];
+    // final name = args['BZ_NM'];
+    print('여기에는 뜨려나??? : $name');
+    print('여기에는 뜨려나??? : $selectedDistrict');
 
     return Scaffold(
       appBar: PreferredSize(
@@ -64,6 +68,7 @@ class DetailRestaurantPage extends GetView<DistrictController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: restaurants.map((restaurant) {
                               String htmlAddress = restaurant.address!;
+                              print('여기 주소는?? : $htmlAddress');
                               htmlAddress =
                                   htmlAddress.replaceAll('<br />', '\n');
                               String htmlMenu = restaurant.menu!;

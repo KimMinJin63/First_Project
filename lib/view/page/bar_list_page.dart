@@ -14,12 +14,15 @@ class BarListPage extends GetView<DistrictController> {
 
   @override
   Widget build(BuildContext context) {
-    final selectedDistrict = Get.arguments as String;
+    final selectedDistrict = Get.arguments;
 
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(30),
-          child: AppBars(title: '특별한 술집', color: AppColor.black, home: () => Get.offAllNamed(MainPage.route)),
+          child: AppBars(
+              title: '특별한 술집',
+              color: AppColor.black,
+              home: () => Get.offAllNamed(MainPage.route)),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16),
@@ -28,12 +31,12 @@ class BarListPage extends GetView<DistrictController> {
             children: [
               Center(
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: Image.asset(
-                                  'assets/images/logo.jpeg',
-                                  height: MediaQuery.of(context).size.height / 5,
-                                ),
-                  )),
+                padding: const EdgeInsets.only(top: 16),
+                child: Image.asset(
+                  'assets/images/logo.jpeg',
+                  height: MediaQuery.of(context).size.height / 5,
+                ),
+              )),
               const SizedBox(
                 height: 70,
               ),
@@ -44,12 +47,12 @@ class BarListPage extends GetView<DistrictController> {
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(
-                        child: SizedBox(
-                          height: 20,
-                          width: 20,
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
+                          child: SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
                       } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                         return Center(
                           child: Text(
@@ -80,13 +83,16 @@ class BarListPage extends GetView<DistrictController> {
                                   return Padding(
                                     padding: const EdgeInsets.only(bottom: 12),
                                     child: GestureDetector(
-                                      onTap: () => Get.toNamed(
-                                        DetailRestaurantPage.route,
-                                      arguments: {
-                                        'district': selectedDistrict,
-                                        'name': name,
+                                      onTap: () {
+                                        print('이름이 바로 : $name');
+                                        Get.toNamed(
+                                          DetailRestaurantPage.route,
+                                          arguments: [
+                                            selectedDistrict,
+                                             name,
+                                          ],
+                                        );
                                       },
-                                      ),
                                       child: Container(
                                         height: 55,
                                         decoration: BoxDecoration(

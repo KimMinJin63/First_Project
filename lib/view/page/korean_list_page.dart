@@ -156,6 +156,7 @@ class KoreanListPage extends GetView<DistrictController> {
                     );
                   } else {
                     List<District> restaurants = snapshot.data!;
+                    print('레스토랑츠 : ${restaurants.last.name}');
                     int pages = (restaurants.length / 5).ceil();
                     PageController pageController = PageController();
                      int currentPageIndex = 0;
@@ -174,6 +175,7 @@ class KoreanListPage extends GetView<DistrictController> {
                           }
                           List<District> pageItems =
                               restaurants.sublist(startIndex, endIndex);
+                              print('페이지 아이템 : ${pageItems.first.name}');
                           return Padding(
                             padding: const EdgeInsets.only(left: 8, right: 8),
                             child: Column(
@@ -182,8 +184,8 @@ class KoreanListPage extends GetView<DistrictController> {
                                   child: ListView.builder(
                                     itemCount: pageItems.length,
                                     itemBuilder: (context, index) {
-                                      String name = pageItems[index]
-                                          .name!; // Use the 'name' property of the District object
+                                      String name = pageItems[index].name!;
+                                          // .name!; // Use the 'name' property of the District object
                                       return Padding(
                                         padding:
                                             const EdgeInsets.only(bottom: 12),
